@@ -507,7 +507,7 @@
     const yMin = opts.yMin, yMax = opts.yMax;
     const height = opts.height || Math.max(230, Math.min(340, width * 0.62));
     const narrow = width < 480;
-    const m = { t: 14, r: 12, b: narrow ? 42 : 40, l: 40 };
+    const m = { t: 14, r: narrow ? 12 : 34, b: narrow ? 42 : 40, l: 40 };
     const iw = width - m.l - m.r, ih = height - m.t - m.b;
     const X = i => m.l + (cats.length === 1 ? iw/2 : iw * i/(cats.length-1));
     const Y = v => m.t + ih * (1 - (v - yMin)/(yMax - yMin));
