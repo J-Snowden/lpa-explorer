@@ -222,6 +222,9 @@
       groups the org chart already knows about.
     </p>
     <div class="chips" id="chips" aria-label="Study parameters"></div>
+    <p class="muted" style="font-size:.9rem; margin:14px 0 0">
+      Synthetic data reconstructing a peer-reviewed method — <a href="#methodContext">full provenance below</a>.
+    </p>
   </div>
 </header>
 
@@ -230,26 +233,7 @@
   <!-- SECTION 0 -->
   <section id="s0">
     <div class="wrap">
-      <div class="callout" id="provenance">
-        <p style="margin-bottom:.6em">
-          The method here is real: a peer-reviewed study of 1,698 students, presented at AERA 2026, where I was a
-          co-equal first author and contributed the factor analysis, the latent profile analysis, and the model
-          selection.
-        </p>
-        <p class="muted" style="font-size:.9rem; margin-bottom:.6em">
-          Herrmann Abell, C. F., Deverel-Rico, C., Snowden, J., Brubaker, A., Campanella, M., Flanagan, J.,
-          Lee, D., Olson, P., &amp; Wilson, C. D. (2026). <em>Centering Student Voice in Science Assessment
-          through Leveraging Student Experience Data.</em> AERA Annual Meeting, Los Angeles.
-        </p>
-        <p style="margin-bottom:0; font-size:.95rem">
-          <strong>The data on this page are synthetic</strong> — generated from stipulated parameters, because the
-          real responses belong to the research organisation and were collected from minors under IRB protocols.
-          Nothing here is a finding of the published study; it is a demonstration of its method, moved from an
-          assessment setting into an employee-experience one.
-        </p>
-      </div>
-
-      <details class="evidence" id="methodContext" style="margin-top:18px">
+      <details class="evidence" id="methodContext">
         <summary>
           <span class="tw">▸</span>
           <span>The method behind this
@@ -264,12 +248,28 @@
             the profiles cut clean across every group. That finding is what this page reconstructs, in an employee
             context, on synthetic data.
           </p>
-          <p style="font-size:.95rem; margin-bottom:0">
+          <p style="font-size:.95rem">
             Assessment experience and employee experience are the same measurement problem. Both ask people how
             something felt; both need the instrument validated before the answers mean anything; and both are
             usually reported by sorting people into groups defined in advance — department, tenure, level. Latent
             profile analysis is a layer that runs alongside that reporting, grouping people by their answers rather
             than their attributes. That added layer is what this page is about.
+          </p>
+          <p style="font-size:.95rem">
+            The method here is real: a peer-reviewed study of 1,698 students, presented at AERA 2026, where I was a
+            co-equal first author and contributed the factor analysis, the latent profile analysis, and the model
+            selection.
+          </p>
+          <p class="muted" style="font-size:.9rem">
+            Herrmann Abell, C. F., Deverel-Rico, C., Snowden, J., Brubaker, A., Campanella, M., Flanagan, J.,
+            Lee, D., Olson, P., &amp; Wilson, C. D. (2026). <em>Centering Student Voice in Science Assessment
+            through Leveraging Student Experience Data.</em> AERA Annual Meeting, Los Angeles.
+          </p>
+          <p style="font-size:.95rem; margin-bottom:0">
+            <strong>The data on this page are synthetic</strong> — generated from stipulated parameters, because the
+            real responses belong to the research organisation and were collected from minors under IRB protocols.
+            Nothing here is a finding of the published study; it is a demonstration of its method, moved from an
+            assessment setting into an employee-experience one.
           </p>
         </div>
       </details>
@@ -447,6 +447,8 @@
           </div>
           <p class="muted" style="font-size:.85rem" id="ncNote"></p>
 
+          <p class="muted" style="font-size:.85rem; margin-bottom:0" id="reproNote"></p>
+
         </div>
       </details>
     </div>
@@ -473,17 +475,6 @@
   </section>
 
 </main>
-
-<footer>
-  <div class="wrap wide">
-    <p id="footMeta"></p>
-    <p>
-      Method reconstructed from Herrmann Abell, Deverel-Rico, Snowden, et al. (2026), AERA. Synthetic data;
-      not the study's findings. Pipeline and source linked from the
-      <a href="https://j-snowden.github.io/">main site</a>.
-    </p>
-  </div>
-</footer>
 
 <script>
 (function () {
@@ -620,12 +611,12 @@
     //  - "15 items · 5 factors" from meta;
     //  - "18 models compared" = the LPA grid (3 covariance structures x k=1-6), D.grid.length;
     //  - "Split-half validated" = the 50/50 EFA/CFA split (see D.cfa / evidence section);
-    //  - "Method · AERA 2026" = the peer-reviewed provenance.
+    //  - "Peer-reviewed method" = the peer-reviewed provenance (AERA 2026; full detail in the collapsible).
     const chips = [
       { t: m.n_items + ' items · ' + m.n_factors + ' factors' },
       { t: D.grid.length + ' models compared' },
       { t: 'Split-half validated' },
-      { t: 'Method · AERA 2026' }
+      { t: 'Peer-reviewed method' }
     ];
     document.getElementById('chips').innerHTML = chips.map(c =>
       `<span class="chip">${esc(c.t)}</span>`).join('');
@@ -887,12 +878,11 @@
       'Model 3, k = 5 did not converge to a usable solution (empty class, degenerate BLRT); its cells are marked rather than shown as a spurious 0.0.';
   }
 
-  function renderFooter() {
+  function renderReproNote() {
     const m = D.meta;
-    document.getElementById('footMeta').innerHTML =
-      `${m.n.toLocaleString()} synthetic respondents · ${m.n_items} items · ${m.n_factors} factors · ` +
-      `seed ${m.seed} · pipeline output generated ${esc(m.generated_at)}. All figures on this page are read ` +
-      `directly from <code>data/model_results.json</code>; nothing is hardcoded.`;
+    document.getElementById('reproNote').innerHTML =
+      `Every figure on this page is read live from <code>data/model_results.json</code> (seed ${esc(String(m.seed))}); ` +
+      `nothing is hardcoded.`;
   }
 
   // ------------------------------------------------------------------
@@ -913,7 +903,7 @@
     renderSelTable();
     renderGridTable();
     renderSegNote();
-    renderFooter();
+    renderReproNote();
   }
 
   function bindControls() {
