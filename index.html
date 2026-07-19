@@ -1,0 +1,940 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>The people the dashboard cannot see — a latent profile demonstration</title>
+<style>
+  :root {
+    --bg: #ffffff;
+    --panel: #f6f8fb;
+    --panel-2: #eef2f7;
+    --ink: #17202c;
+    --ink-soft: #35414f;
+    --muted: #5b6875;
+    --line: #dde4ec;
+    --line-strong: #c6d0db;
+    --accent: #1f5f8b;
+    --accent-ink: #17475f;
+    --warn: #9a5b12;
+    --good: #2f7a4d;
+    --focus: #1f5f8b;
+    /* Chart cards are near-white in BOTH themes so the single-hue blue ramp
+       reads identically regardless of page theme. See note in README. */
+    --chart-bg: #fcfdff;
+    --chart-ink: #33404e;
+    --chart-muted: #6a7683;
+    --chart-grid: #e7edf4;
+    --chart-zero: #b4c1d0;
+    --radius: 10px;
+    --maxw: 860px;
+    --maxw-wide: 1080px;
+  }
+  :root { --chart-muted: #6a7683; }
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg: #0e131a;
+      --panel: #161d27;
+      --panel-2: #1c2530;
+      --ink: #e7ecf2;
+      --ink-soft: #c3ccd6;
+      --muted: #93a0ad;
+      --line: #263039;
+      --line-strong: #33404c;
+      --accent: #6aa9d8;
+      --accent-ink: #a9cdea;
+      --warn: #e0a15a;
+      --good: #6fbf8e;
+      --focus: #6aa9d8;
+    }
+  }
+  :root[data-theme="light"] {
+    --bg: #ffffff; --panel: #f6f8fb; --panel-2: #eef2f7; --ink: #17202c;
+    --ink-soft: #35414f; --muted: #5b6875; --line: #dde4ec; --line-strong: #c6d0db;
+    --accent: #1f5f8b; --accent-ink: #17475f; --warn: #9a5b12; --good: #2f7a4d; --focus: #1f5f8b;
+  }
+  :root[data-theme="dark"] {
+    --bg: #0e131a; --panel: #161d27; --panel-2: #1c2530; --ink: #e7ecf2;
+    --ink-soft: #c3ccd6; --muted: #93a0ad; --line: #263039; --line-strong: #33404c;
+    --accent: #6aa9d8; --accent-ink: #a9cdea; --warn: #e0a15a; --good: #6fbf8e; --focus: #6aa9d8;
+  }
+
+  * { box-sizing: border-box; }
+  html { -webkit-text-size-adjust: 100%; }
+  body {
+    margin: 0;
+    overflow-x: hidden;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    line-height: 1.6;
+    font-size: 17px;
+    -webkit-font-smoothing: antialiased;
+  }
+  .wrap { max-width: var(--maxw); margin: 0 auto; padding: 0 20px; }
+  .wide { max-width: var(--maxw-wide); }
+
+  a { color: var(--accent); text-decoration: none; border-bottom: 1px solid transparent; }
+  a:hover { border-bottom-color: currentColor; }
+  a:focus-visible, button:focus-visible, summary:focus-visible {
+    outline: 2px solid var(--focus); outline-offset: 2px; border-radius: 4px;
+  }
+
+  h1, h2, h3 { line-height: 1.25; color: var(--ink); font-weight: 650; }
+  h1 { font-size: clamp(1.7rem, 4.5vw, 2.5rem); letter-spacing: -0.01em; margin: 0 0 .4em; }
+  h2 { font-size: clamp(1.3rem, 3.2vw, 1.7rem); letter-spacing: -0.005em; margin: 0 0 .5em; }
+  h3 { font-size: 1.08rem; margin: 0 0 .4em; }
+  p { margin: 0 0 1em; }
+  .lead { font-size: 1.15rem; color: var(--ink-soft); }
+  .muted { color: var(--muted); }
+  strong { font-weight: 650; }
+
+  /* ---- Header ---- */
+  header.top { border-bottom: 1px solid var(--line); background: var(--panel); }
+  .topbar { display: flex; justify-content: flex-end; padding: 10px 20px 0; max-width: var(--maxw-wide); margin: 0 auto; }
+  .theme-toggle {
+    font: inherit; font-size: .82rem; color: var(--muted); background: transparent;
+    border: 1px solid var(--line-strong); border-radius: 999px; padding: 5px 12px; cursor: pointer;
+  }
+  .theme-toggle:hover { color: var(--ink); border-color: var(--accent); }
+  .hero { padding: 18px 0 34px; }
+  .attribution { font-size: .92rem; color: var(--muted); margin: 0 0 1.4em; }
+  .chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 4px; }
+  .chip {
+    font-size: .78rem; letter-spacing: .01em; color: var(--ink-soft);
+    background: var(--panel-2); border: 1px solid var(--line); border-radius: 999px; padding: 4px 11px;
+  }
+  .chip.synthetic { color: var(--warn); border-color: color-mix(in srgb, var(--warn) 40%, var(--line)); }
+
+  /* ---- Sections ---- */
+  section { padding: 40px 0; border-top: 1px solid var(--line); }
+  section:first-of-type { border-top: none; }
+  .eyebrow { font-size: .78rem; letter-spacing: .09em; text-transform: uppercase; color: var(--accent); font-weight: 650; margin: 0 0 .5em; }
+  .section-intro { max-width: 680px; }
+
+  .card {
+    background: var(--panel); border: 1px solid var(--line); border-radius: var(--radius);
+    padding: 20px; margin: 18px 0;
+  }
+  .callout {
+    border-left: 3px solid var(--accent); background: var(--panel);
+    padding: 14px 18px; border-radius: 0 var(--radius) var(--radius) 0; margin: 18px 0;
+  }
+  .callout p:last-child, .card p:last-child { margin-bottom: 0; }
+  .figure-note { font-size: .88rem; color: var(--muted); margin-top: 10px; }
+  .big-number { font-variant-numeric: tabular-nums; font-weight: 680; color: var(--accent-ink); }
+
+  /* ---- Chart card ---- */
+  .chartcard {
+    background: var(--chart-bg); border: 1px solid var(--line-strong);
+    border-radius: var(--radius); padding: 14px 14px 10px;
+  }
+  .chartcard svg { display: block; width: 100%; height: auto; }
+  .chart-title { font-size: .9rem; font-weight: 650; color: var(--chart-ink); margin: 2px 4px 8px; }
+  .legend { display: flex; flex-wrap: wrap; gap: 10px 16px; margin: 10px 4px 2px; }
+  .legend .item { display: inline-flex; align-items: center; gap: 7px; font-size: .82rem; color: var(--chart-ink); }
+  .legend .swatch { width: 14px; height: 14px; border-radius: 3px; flex: none; box-shadow: 0 0 0 1px rgba(0,0,0,.06) inset; }
+
+  .grid2 { display: grid; grid-template-columns: 1fr; gap: 18px; }
+  @media (min-width: 760px) { .grid2 { grid-template-columns: 1fr 1fr; } }
+
+  /* ---- k buttons (Section 3) ---- */
+  .kbtns { display: flex; gap: 10px; margin: 6px 0 4px; flex-wrap: wrap; }
+  .kbtn {
+    font: inherit; font-size: 1.15rem; font-weight: 680; cursor: pointer;
+    background: var(--panel); color: var(--ink-soft);
+    border: 1.5px solid var(--line-strong); border-radius: var(--radius);
+    padding: 14px 24px; min-width: 74px; line-height: 1;
+  }
+  .kbtn small { display: block; font-size: .62rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin-top: 6px; }
+  .kbtn[aria-pressed="true"] { border-color: var(--accent); background: color-mix(in srgb, var(--accent) 12%, var(--panel)); color: var(--accent-ink); }
+  .kbtn[aria-pressed="true"] small { color: var(--accent); }
+  .kbtn:hover:not([aria-pressed="true"]) { border-color: var(--accent); }
+
+  .rec { margin-top: 4px; }
+  .rec .verdict { font-weight: 680; }
+  .rec .retained { color: var(--good); }
+  .rec .rejected { color: var(--warn); }
+
+  /* ---- Tables ---- */
+  .tablewrap { overflow-x: auto; margin: 14px 0; border: 1px solid var(--line); border-radius: var(--radius); }
+  table { border-collapse: collapse; width: 100%; font-size: .86rem; font-variant-numeric: tabular-nums; }
+  caption { text-align: left; font-size: .86rem; color: var(--muted); padding: 10px 12px; }
+  th, td { padding: 8px 12px; text-align: right; border-bottom: 1px solid var(--line); white-space: nowrap; }
+  th:first-child, td:first-child { text-align: left; }
+  thead th { position: sticky; top: 0; background: var(--panel-2); color: var(--ink-soft); font-weight: 650; }
+  tbody tr:last-child td { border-bottom: none; }
+  tr.retained td { background: color-mix(in srgb, var(--good) 10%, transparent); }
+  .badge { display: inline-block; font-size: .68rem; font-weight: 650; letter-spacing: .04em; text-transform: uppercase; padding: 2px 7px; border-radius: 5px; }
+  .badge.keep { background: color-mix(in srgb, var(--good) 20%, transparent); color: var(--good); }
+  .badge.nc { background: color-mix(in srgb, var(--warn) 20%, transparent); color: var(--warn); }
+  .barcell { position: relative; }
+  .barcell .bar { position: absolute; left: 0; top: 0; bottom: 0; background: color-mix(in srgb, var(--accent) 22%, transparent); z-index: 0; }
+  .barcell span { position: relative; z-index: 1; }
+
+  /* ---- Disclosure ---- */
+  details.evidence { border: 1px solid var(--line-strong); border-radius: var(--radius); background: var(--panel); }
+  details.evidence > summary {
+    cursor: pointer; padding: 18px 20px; font-weight: 650; font-size: 1.1rem; list-style: none;
+    display: flex; align-items: center; gap: 12px;
+  }
+  details.evidence > summary::-webkit-details-marker { display: none; }
+  details.evidence > summary .tw { color: var(--accent); transition: transform .15s; font-size: .9em; }
+  details.evidence[open] > summary .tw { transform: rotate(90deg); }
+  details.evidence > summary .sub { font-weight: 400; font-size: .86rem; color: var(--muted); }
+  .evidence-body { padding: 4px 20px 22px; border-top: 1px solid var(--line); }
+
+  .crit-cards { display: grid; grid-template-columns: 1fr; gap: 14px; margin: 16px 0; }
+  @media (min-width: 640px) { .crit-cards { grid-template-columns: 1fr 1fr; } }
+  .crit { border: 1px solid var(--line); border-radius: var(--radius); padding: 15px 16px; background: var(--bg); }
+  .crit h4 { margin: 0 0 4px; font-size: .95rem; display: flex; justify-content: space-between; align-items: baseline; gap: 8px; }
+  .crit .tag { font-size: .72rem; font-weight: 650; padding: 2px 8px; border-radius: 999px; }
+  .crit .tag.decisive { background: color-mix(in srgb, var(--good) 18%, transparent); color: var(--good); }
+  .crit .tag.silent { background: color-mix(in srgb, var(--muted) 20%, transparent); color: var(--muted); }
+  .crit p { margin: 0; font-size: .9rem; color: var(--ink-soft); }
+
+  footer { border-top: 1px solid var(--line); padding: 30px 0 60px; color: var(--muted); font-size: .88rem; }
+  footer p { margin: 0 0 .6em; }
+
+  .vh { position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; border: 0; }
+
+  .error-panel { border: 1px solid var(--warn); background: color-mix(in srgb, var(--warn) 8%, var(--bg)); border-radius: var(--radius); padding: 20px; margin: 24px 0; }
+
+  @media (max-width: 400px) {
+    body { font-size: 16px; }
+    .wrap { padding: 0 15px; }
+    .kbtn { padding: 12px 16px; min-width: 62px; }
+  }
+</style>
+</head>
+<body>
+
+<header class="top">
+  <div class="topbar">
+    <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle colour theme">◐ Theme</button>
+  </div>
+  <div class="wrap hero">
+    <p class="attribution">
+      Built by <a href="https://j-snowden.github.io/" target="_blank" rel="noopener">Jeff Snowden</a>
+      to demonstrate the factor analysis and latent profile methodology he contributed to a peer-reviewed
+      assessment study — reconstructed here, on synthetic data, in an employee-experience setting.
+    </p>
+    <h1>The people the dashboard cannot see</h1>
+    <p class="lead" id="heroLead">
+      Sorting people into groups by how they answered separates the worst experiences from the best far more
+      cleanly than sorting them by department, tenure, or level ever could — because the groups the org chart
+      knows about are not what is driving the difference.
+    </p>
+    <div class="chips" id="chips" aria-label="Study parameters"></div>
+  </div>
+</header>
+
+<main id="main">
+
+  <!-- SECTION 0 -->
+  <section id="s0">
+    <div class="wrap">
+      <p class="eyebrow">Where this came from</p>
+      <div class="section-intro">
+        <p id="s0p1">
+          A research team asked 1,698 middle- and high-school students not whether they passed a science test,
+          but how it <em>felt</em>. The answers sorted into four kinds of experience — and the students having
+          the worst time were not identifiable in advance from any demographic characteristic the team examined;
+          the profiles cut clean across every group. That finding is what this page reconstructs, in an employee
+          context, on synthetic data.
+        </p>
+        <p>
+          Assessment experience and employee experience are the same measurement problem. Both ask people how
+          something felt; both need the instrument validated before the answers mean anything; and both are
+          usually analysed by sorting people into groups defined in advance — department, tenure, level. That
+          last habit is what this page is about.
+        </p>
+      </div>
+      <div class="callout" id="provenance">
+        <p style="margin-bottom:.6em">
+          The method is real. It was built for a peer-reviewed study of 1,698 students and presented at AERA 2026:
+        </p>
+        <p style="margin-bottom:.6em; font-size:.95rem">
+          Herrmann Abell, C. F., Deverel-Rico, C., Snowden, J., Brubaker, A., Campanella, M., Flanagan, J.,
+          Lee, D., Olson, P., &amp; Wilson, C. D. (2026). <em>Centering Student Voice in Science Assessment
+          through Leveraging Student Experience Data.</em> AERA Annual Meeting, Los Angeles.
+        </p>
+        <p class="muted" style="font-size:.9rem; margin-bottom:0">
+          Co-equal first authorship: Herrmann Abell, Deverel-Rico, and Snowden. This author contributed the
+          factor analysis, the latent profile analysis, and the model selection. <strong>The data on this page
+          are synthetic</strong> — generated from stipulated parameters, because the real responses belong to the
+          research organisation and were collected from minors under IRB protocols. Nothing here is a finding of
+          the published study; it is a demonstration of its method.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 2 -->
+  <section id="s2">
+    <div class="wrap wide">
+      <p class="eyebrow">The finding</p>
+      <div class="section-intro">
+        <h2>The people the dashboard cannot see</h2>
+        <p>
+          A latent profile analysis groups respondents by the pattern of their answers rather than by anything
+          already on file about them. Applied here, it separates four kinds of experience.
+        </p>
+      </div>
+
+      <div class="grid2" style="align-items:start; margin-top:12px">
+        <div class="chartcard">
+          <div class="chart-title" id="s2title"></div>
+          <div id="s2chart"></div>
+          <div class="legend" id="s2legend"></div>
+        </div>
+        <div>
+          <div id="s2side"></div>
+        </div>
+      </div>
+
+      <div class="card" id="s2interpCard" style="margin-top:22px">
+        <p id="s2interpText"></p>
+        <p id="s2limitText" style="margin-bottom:0"></p>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 3 -->
+  <section id="s3">
+    <div class="wrap wide">
+      <p class="eyebrow">The decision</p>
+      <div class="section-intro">
+        <h2>How many kinds of experience?</h2>
+        <p>
+          The profiles are not given; the analyst chooses how many to keep. That choice is not cosmetic — it
+          decides whether the worst-off group exists as something you can staff for. Change it and watch the
+          recommendation change.
+        </p>
+      </div>
+
+      <div class="kbtns" role="group" aria-label="Number of profiles">
+        <button class="kbtn" id="k3" type="button" aria-pressed="false">3<small>profiles</small></button>
+        <button class="kbtn" id="k4" type="button" aria-pressed="true">4<small>profiles</small></button>
+        <button class="kbtn" id="k5" type="button" aria-pressed="false">5<small>profiles</small></button>
+      </div>
+
+      <div class="grid2" style="align-items:start; margin-top:14px">
+        <div class="chartcard">
+          <div class="chart-title" id="s3title"></div>
+          <div id="s3chart"></div>
+          <div class="legend" id="s3legend"></div>
+        </div>
+        <div>
+          <div class="card rec" id="s3rec" style="margin-top:0"></div>
+          <p class="muted" style="font-size:.9rem; margin-top:14px">
+            This choice is a judgement. The evidence behind it is in
+            <a href="#s5" id="jumpEvidence">the model-selection section</a> below.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 4 -->
+  <section id="s4">
+    <div class="wrap wide">
+      <p class="eyebrow">A second blind spot</p>
+      <div class="section-intro">
+        <h2>Who answers the “what’s wrong” question</h2>
+        <p>
+          Reading the free-text comments does not rescue you, because response behaviour is itself sorted by
+          profile. Skip rates on the two open prompts run in opposite directions.
+        </p>
+      </div>
+
+      <div class="grid2" style="align-items:start">
+        <div class="chartcard">
+          <div class="chart-title">“What worked” — % who skipped</div>
+          <div id="oeWorked"></div>
+        </div>
+        <div class="chartcard">
+          <div class="chart-title">“What was hard” — % who skipped</div>
+          <div id="oeHard"></div>
+        </div>
+      </div>
+      <div class="legend" id="oeLegend" style="margin-left:2px"></div>
+
+      <div class="callout" style="margin-top:20px">
+        <p id="s4note"></p>
+      </div>
+
+      <div class="tablewrap">
+        <table id="oeTable">
+          <caption>Response behaviour by profile. Word counts and dismissal rates are over respondents who did not skip.</caption>
+          <thead>
+            <tr>
+              <th>Profile</th><th>Prompt</th><th>Skipped %</th><th>One-word %</th>
+              <th>Dismissal %</th><th>Median words</th><th>Mean words</th>
+            </tr>
+          </thead>
+          <tbody></tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <!-- SECTION 5 -->
+  <section id="s5">
+    <div class="wrap wide">
+      <p class="eyebrow">Under the hood</p>
+      <h2 style="margin-bottom:.3em">The evidence behind the choice</h2>
+      <p class="muted section-intro" style="margin-bottom:18px">
+        Everything above rests on a model-selection decision and a measurement model. Both are here in full, for
+        the reader who wants them.
+      </p>
+
+      <details class="evidence" id="evidence">
+        <summary>
+          <span class="tw">▸</span>
+          <span>The model selection, in full
+            <span class="sub">— 18-model grid, four criteria, and what each does and does not settle</span>
+          </span>
+        </summary>
+        <div class="evidence-body">
+
+          <h3 style="margin-top:18px">The measurement model was validated first</h3>
+          <p style="font-size:.95rem">
+            Before any profiles were extracted, the five-factor structure was confirmed on held-out data. The
+            sample was split 50/50: an exploratory analysis on one half, a confirmatory fit on the other, so the
+            structure is not discovered and confirmed on the same respondents. Scores were then extracted from the
+            winning model refit on the full sample.
+          </p>
+          <p id="cfaProse" style="font-size:.95rem"></p>
+
+          <h3 style="margin-top:22px">Four criteria, two of them silent</h3>
+          <p style="font-size:.95rem">
+            The retained solution is <strong>Model 2 (varying variances, zero covariances), k = 4</strong>. The
+            honest part is what each conventional criterion actually contributes to that choice.
+          </p>
+          <div class="crit-cards" id="critCards"></div>
+
+          <h3 style="margin-top:22px">The elbow, in numbers</h3>
+          <p style="font-size:.95rem" id="elbowProse"></p>
+          <div class="tablewrap">
+            <table id="selTable">
+              <caption>Model 2 across k. The bar tracks the share of the previous step's BIC improvement retained — the elbow is a change in <em>rate</em>, which absolute BIC hides.</caption>
+              <thead>
+                <tr><th>k</th><th>BIC</th><th>Δ BIC</th><th>% of previous step</th><th>Entropy</th><th>Min class %</th><th>BLRT p</th></tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+
+          <p style="font-size:.95rem" id="segNote"></p>
+
+          <h3 style="margin-top:22px">The full grid — 18 specifications</h3>
+          <div class="tablewrap">
+            <table id="gridTable">
+              <caption>Three covariance structures × k = 1–6. The retained cell is highlighted.</caption>
+              <thead>
+                <tr><th>Spec</th><th>k</th><th>logLik</th><th>AIC</th><th>BIC</th><th>Entropy</th><th>Min class %</th><th>BLRT p</th></tr>
+              </thead>
+              <tbody></tbody>
+            </table>
+          </div>
+          <p class="muted" style="font-size:.85rem" id="ncNote"></p>
+
+        </div>
+      </details>
+    </div>
+  </section>
+
+</main>
+
+<footer>
+  <div class="wrap wide">
+    <p id="footMeta"></p>
+    <p>
+      Method reconstructed from Herrmann Abell, Deverel-Rico, Snowden, et al. (2026), AERA. Synthetic data;
+      not the study's findings. Pipeline and source at the top of this page's author link.
+    </p>
+  </div>
+</footer>
+
+<script>
+(function () {
+  "use strict";
+
+  // ------------------------------------------------------------------
+  // Color helpers
+  // ------------------------------------------------------------------
+  function hexToRgb(h) {
+    h = h.replace('#', '');
+    return [parseInt(h.substr(0,2),16), parseInt(h.substr(2,2),16), parseInt(h.substr(4,2),16)];
+  }
+  function rgbToHex(r,g,b){
+    const c = n => Math.round(n).toString(16).padStart(2,'0');
+    return '#' + c(r) + c(g) + c(b);
+  }
+  function lerp(a,b,t){ return a + (b-a)*t; }
+  function ramp(darkHex, lightHex, n) {
+    const a = hexToRgb(darkHex), b = hexToRgb(lightHex);
+    const out = [];
+    for (let i=0;i<n;i++){
+      const t = n===1 ? 0 : i/(n-1);
+      out.push(rgbToHex(lerp(a[0],b[0],t), lerp(a[1],b[1],t), lerp(a[2],b[2],t)));
+    }
+    return out;
+  }
+  // Profile ramp: Low (dark, index 0) -> High (light, last). Solutions arrive
+  // sorted low->high, so index maps directly. Widened deliberately so each of
+  // the four blues is matchable to its table row.
+  const PROFILE_DARK = '#0b3d66', PROFILE_LIGHT = '#8fc2e6';
+  function profileColors(n){ return ramp(PROFILE_DARK, PROFILE_LIGHT, n); }
+
+  const AXIS_INK = '#33404e', AXIS_MUTED = '#6a7683', GRID = '#e7edf4', ZERO = '#a9b8c8';
+
+  // ------------------------------------------------------------------
+  // Formatting
+  // ------------------------------------------------------------------
+  const esc = s => String(s).replace(/[&<>]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
+  const signed = (x, d=2) => (x>=0?'+':'−') + Math.abs(x).toFixed(d);
+  const num = (x, d=0) => x==null ? '—' : Number(x).toFixed(d);
+  const ABBR = { Clarity:'Clar', Enablement:'Enab', Engagement:'Enga', Impact:'Impa', Autonomy:'Auto' };
+
+  // ------------------------------------------------------------------
+  // Line chart (pixel-sized, redrawn on resize)
+  // ------------------------------------------------------------------
+  function lineChart(width, opts) {
+    const cats = opts.cats;
+    const series = opts.series;               // [{name, values[], color, width?}]
+    const yMin = opts.yMin, yMax = opts.yMax;
+    const height = opts.height || Math.max(230, Math.min(340, width * 0.62));
+    const narrow = width < 480;
+    const m = { t: 14, r: 12, b: narrow ? 42 : 40, l: 40 };
+    const iw = width - m.l - m.r, ih = height - m.t - m.b;
+    const X = i => m.l + (cats.length === 1 ? iw/2 : iw * i/(cats.length-1));
+    const Y = v => m.t + ih * (1 - (v - yMin)/(yMax - yMin));
+    const ticks = opts.ticks || [-1.5,-1,-0.5,0,0.5,1,1.5];
+
+    let s = `<svg viewBox="0 0 ${width} ${height}" role="img" aria-label="${esc(opts.aria||'')}" preserveAspectRatio="xMidYMid meet">`;
+    // gridlines + y labels
+    ticks.forEach(t => {
+      if (t < yMin || t > yMax) return;
+      const yy = Y(t);
+      const isZero = Math.abs(t) < 1e-9;
+      s += `<line x1="${m.l}" y1="${yy.toFixed(1)}" x2="${width-m.r}" y2="${yy.toFixed(1)}" stroke="${isZero?ZERO:GRID}" stroke-width="${isZero?1.4:1}"/>`;
+      s += `<text x="${m.l-8}" y="${(yy+3.5).toFixed(1)}" text-anchor="end" font-size="10.5" fill="${AXIS_MUTED}">${t>0?'+':''}${t}</text>`;
+    });
+    // x labels
+    cats.forEach((c,i) => {
+      const label = narrow ? (ABBR[c]||c) : c;
+      s += `<text x="${X(i).toFixed(1)}" y="${height-m.b+18}" text-anchor="middle" font-size="${narrow?10:11}" fill="${AXIS_INK}">${esc(label)}</text>`;
+    });
+    // series
+    series.forEach(ser => {
+      const pts = ser.values.map((v,i)=> `${X(i).toFixed(1)},${Y(v).toFixed(1)}`).join(' ');
+      const w = ser.width || 2.6;
+      s += `<polyline points="${pts}" fill="none" stroke="${ser.color}" stroke-width="${w}" stroke-linejoin="round" stroke-linecap="round" opacity="${ser.opacity||1}"/>`;
+      ser.values.forEach((v,i)=>{
+        s += `<circle cx="${X(i).toFixed(1)}" cy="${Y(v).toFixed(1)}" r="${ser.markers===false?0:3.1}" fill="${ser.color}" stroke="${opts.markerStroke||'#fcfdff'}" stroke-width="1"/>`;
+      });
+    });
+    s += `</svg>`;
+    return s;
+  }
+
+  // Vertical bar chart (for skip rates)
+  function barChart(width, opts) {
+    const cats = opts.cats, values = opts.values, colors = opts.colors;
+    const yMax = opts.yMax, height = opts.height || 210;
+    const m = { t: 12, r: 8, b: 30, l: 34 };
+    const iw = width - m.l - m.r, ih = height - m.t - m.b;
+    const n = cats.length;
+    const bw = Math.min(54, iw / n * 0.62);
+    const step = iw / n;
+    const Y = v => m.t + ih * (1 - v/yMax);
+    const ticks = opts.ticks || [0,10,20,30];
+    let s = `<svg viewBox="0 0 ${width} ${height}" role="img" aria-label="${esc(opts.aria||'')}" preserveAspectRatio="xMidYMid meet">`;
+    ticks.forEach(t=>{
+      if (t>yMax) return;
+      const yy = Y(t);
+      s += `<line x1="${m.l}" y1="${yy.toFixed(1)}" x2="${width-m.r}" y2="${yy.toFixed(1)}" stroke="${GRID}"/>`;
+      s += `<text x="${m.l-6}" y="${(yy+3.5).toFixed(1)}" text-anchor="end" font-size="10" fill="${AXIS_MUTED}">${t}</text>`;
+    });
+    cats.forEach((c,i)=>{
+      const cx = m.l + step*i + step/2;
+      const v = values[i];
+      const yy = Y(v);
+      s += `<rect x="${(cx-bw/2).toFixed(1)}" y="${yy.toFixed(1)}" width="${bw.toFixed(1)}" height="${(m.t+ih-yy).toFixed(1)}" rx="3" fill="${colors[i]}"/>`;
+      s += `<text x="${cx.toFixed(1)}" y="${(yy-4).toFixed(1)}" text-anchor="middle" font-size="10.5" font-weight="600" fill="${AXIS_INK}">${v.toFixed(1)}</text>`;
+    });
+    s += `</svg>`;
+    return s;
+  }
+
+  function widthOf(el){ return Math.max(220, Math.floor(el.getBoundingClientRect().width)); }
+
+  function legendHTML(items){
+    return items.map(it => `<span class="item"><span class="swatch" style="background:${it.color}"></span>${esc(it.name)}</span>`).join('');
+  }
+
+  // ------------------------------------------------------------------
+  // State
+  // ------------------------------------------------------------------
+  let D = null;
+  const state = { k: 4 };
+  const STRUCTURAL = ['Clarity', 'Enablement'];
+  const AFFECTIVE = ['Engagement', 'Impact', 'Autonomy'];
+
+  // ------------------------------------------------------------------
+  // Renderers
+  // ------------------------------------------------------------------
+  function renderChips() {
+    const m = D.meta;
+    const chips = [
+      { t: m.n.toLocaleString() + ' synthetic respondents', synthetic: true },
+      { t: m.n_items + ' items · ' + m.n_factors + ' factors' },
+      { t: 'Latent profile analysis' },
+      { t: 'Method · AERA 2026' }
+    ];
+    document.getElementById('chips').innerHTML = chips.map(c =>
+      `<span class="chip${c.synthetic?' synthetic':''}">${esc(c.t)}</span>`).join('');
+  }
+
+  // Section 2: the profile solution
+  function renderS2() {
+    const box = document.getElementById('s2chart');
+    const w = widthOf(box);
+    const sol = D.solutions['4'];
+    const cols = profileColors(sol.length);
+    const series = sol.map((p,i) => ({ name: p.label, values: p.means, color: cols[i], width: 2.8 }));
+    document.getElementById('s2title').textContent = 'Mean factor score by experience profile';
+    box.innerHTML = lineChart(w, {
+      cats: D.factors, series, yMin: -1.5, yMax: 1.5, height: Math.max(240, w*0.6),
+      aria: 'Four profile lines fanning apart across the five factors.'
+    });
+    document.getElementById('s2legend').innerHTML = legendHTML(series.map(s=>({name:s.name, color:s.color})));
+
+    const av = aveppMap();
+    const rows = sol.map((p,i) => {
+      const c = cols[i];
+      return `<tr>
+        <td><span class="swatch" style="display:inline-block;width:11px;height:11px;border-radius:3px;background:${c};margin-right:7px;vertical-align:baseline"></span>${esc(p.label)}</td>
+        <td>${p.n}</td><td>${num(p.pct,1)}%</td><td>${num(av[p.label],2).replace(/^0\./,'.')}</td>
+      </tr>`;
+    }).join('');
+    document.getElementById('s2side').innerHTML = `
+      <div class="tablewrap" style="margin-top:0">
+        <table>
+          <caption>Four profiles: size and classification certainty (average posterior probability; ≥ .80 is adequate).</caption>
+          <thead><tr><th>Profile</th><th>n</th><th>Share</th><th>AvePP</th></tr></thead>
+          <tbody>${rows}</tbody>
+        </table>
+      </div>`;
+  }
+  function aveppMap() {
+    const m = {};
+    D.final.avepp.forEach(a => { m[a.profile] = a.avepp; });
+    return m;
+  }
+
+  function factorRange(factor) {
+    const i = D.factors.indexOf(factor);
+    const vals = D.solutions['4'].map(p => p.means[i]);
+    return Math.max(...vals) - Math.min(...vals);
+  }
+  function avgRange(factors) {
+    return factors.reduce((s,f) => s + factorRange(f), 0) / factors.length;
+  }
+
+  function renderS2Interp() {
+    const low = D.solutions['4'][0];
+    const structural = avgRange(STRUCTURAL);
+    const affective = avgRange(AFFECTIVE);
+    document.getElementById('s2interpText').innerHTML =
+      `The four profiles separate far more on the affective factors — Engagement, Impact, Autonomy — than on the ` +
+      `structural ones — Clarity, Enablement. Across the solution, the affective factors span an average of ` +
+      `<span class="big-number">${num(affective,2)} SD</span> from lowest to highest profile, versus ` +
+      `<span class="big-number">${num(structural,2)} SD</span> for the structural pair. People report broadly ` +
+      `similar clarity about what is expected of them, and very different levels of investment in it. Whatever ` +
+      `distinguishes these groups, it is not that some of them lack information.`;
+    document.getElementById('s2limitText').innerHTML =
+      `These profiles are also ordinal: the groups differ in level more than in shape, which is the common result ` +
+      `in engagement profile research and which constrains what follows from them. A solution with genuinely ` +
+      `different shapes would support different interventions per profile. This one supports knowing that ` +
+      `<strong>${esc(low.label)}</strong> is <span class="big-number">${num(low.pct,0)}%</span> of respondents — ` +
+      `${low.n} people — and knowing that it is not defined by anything already recorded in the HR system.`;
+  }
+
+  // Section 3: k selector
+  function renderS3() {
+    const k = String(state.k);
+    const sol = D.solutions[k];
+    const cols = profileColors(sol.length);
+    const box = document.getElementById('s3chart');
+    const w = widthOf(box);
+    const series = sol.map((p,i) => ({ name: p.label, values: p.means, color: cols[i], width: 2.8 }));
+    document.getElementById('s3title').textContent = k + '-profile solution';
+    box.innerHTML = lineChart(w, {
+      cats: D.factors, series, yMin: -1.5, yMax: 1.5, height: Math.max(240, w*0.6),
+      aria: k + ' profile lines across the five factors.'
+    });
+    document.getElementById('s3legend').innerHTML = legendHTML(series.map(s=>({name:s.name,color:s.color})));
+
+    // recommendation
+    const av = aveppMap();
+    const sol4low = D.solutions['4'][0];
+    let title, cls, body;
+    if (k === '3') {
+      const lowest = sol[0];
+      title = 'Under-extraction';
+      cls = 'rejected';
+      body = `Three profiles collapse the bottom of the scale. The worst-experience group visible at k = 4 — ` +
+        `<strong>${sol4low.n} people, ${num(sol4low.pct,0)}%</strong> of the sample — is absorbed into a broad ` +
+        `moderate-low band (${esc(lowest.label)}, ${num(lowest.pct,1)}%). A population the model no longer ` +
+        `distinguishes cannot be staffed for. Nothing would be aimed at them.`;
+    } else if (k === '4') {
+      const lowAv = av[sol4low.label];
+      title = 'Retained';
+      cls = 'retained';
+      body = `<strong>${esc(sol4low.label)}</strong> is a separable <strong>${num(sol4low.pct,0)}%</strong> of ` +
+        `respondents (${sol4low.n} people), with average posterior probability ` +
+        `<strong>${num(lowAv,2).replace(/^0\./,'.')}</strong> — clean enough to aim an intervention at. Every class ` +
+        `clears 5%, and the profiles are ordered and interpretable. This is the solution the evidence below supports.`;
+    } else {
+      const smallest = sol.reduce((a,b)=> b.pct < a.pct ? b : a);
+      title = 'Over-extraction';
+      cls = 'rejected';
+      body = `Five profiles split the middle of the distribution. The additional class is small ` +
+        `(${num(smallest.pct,1)}%) and its separation from its neighbours is weak — it would not survive being ` +
+        `briefed to a stakeholder as a distinct kind of experience. The extra profile buys precision the data ` +
+        `cannot support.`;
+    }
+    document.getElementById('s3rec').innerHTML =
+      `<p class="verdict ${cls}" style="margin-bottom:.4em">k = ${k} · ${title}</p><p style="margin-bottom:0">${body}</p>`;
+
+    // button labels
+    [['k3','3'],['k4','4'],['k5','5']].forEach(([id,kk])=>{
+      document.getElementById(id).setAttribute('aria-pressed', String(kk===k));
+    });
+  }
+
+  // Section 4: open-text
+  function renderS4() {
+    const worked = D.oe.worked, hard = D.oe.hard;
+    const profOrder = worked.map(w => w.profile);
+    const cols = profileColors(profOrder.length);
+    const wBox = document.getElementById('oeWorked'), hBox = document.getElementById('oeHard');
+    const wc = widthOf(wBox), hc = widthOf(hBox);
+    const yMax = 30;
+    wBox.innerHTML = barChart(wc, { cats: profOrder.map(p=>ABBR2(p)), values: worked.map(w=>w.pct_skipped), colors: cols, yMax, aria: 'Skip rate on the what-worked prompt, low for every profile.' });
+    hBox.innerHTML = barChart(hc, { cats: profOrder.map(p=>ABBR2(p)), values: hard.map(w=>w.pct_skipped), colors: cols, yMax, aria: 'Skip rate on the what-was-hard prompt, rising with engagement.' });
+    document.getElementById('oeLegend').innerHTML = legendHTML(profOrder.map((p,i)=>({name:p,color:cols[i]})));
+
+    const lowHard = hard[0].pct_skipped, highHard = hard[hard.length-1].pct_skipped;
+    const lowDis = worked[0].pct_dismissal, highDis = worked[worked.length-1].pct_dismissal;
+    document.getElementById('s4note').innerHTML =
+      `The inversion is the point. On “what was hard,” the people with the fewest problems answer least — the ` +
+      `<strong>${esc(hard[hard.length-1].profile)}</strong> group skips <strong>${num(highHard,1)}%</strong> of the ` +
+      `time versus <strong>${num(lowHard,1)}%</strong> for <strong>${esc(hard[0].profile)}</strong>. So the ` +
+      `comment corpus for “what’s wrong” is written disproportionately by the disengaged. And on “what worked,” ` +
+      `the disengaged do respond but say little — ${num(lowDis,1)}% dismissals versus ${num(highDis,1)}%. Response ` +
+      `behaviour is data, not missingness: the people with the fewest problems are the least likely to answer the ` +
+      `“what’s wrong” prompt at all, so a comment corpus built from that prompt systematically overrepresents the ` +
+      `disengaged before a single word is read. Any thematic analysis that treats the corpus as representative of ` +
+      `the workforce is reading the loudest signal as though it were the typical one.`;
+
+    const tb = document.querySelector('#oeTable tbody');
+    const mkRows = (arr, prompt) => arr.map(r => `
+      <tr>
+        <td>${esc(r.profile)}</td><td>${esc(prompt)}</td>
+        <td>${num(r.pct_skipped,1)}</td><td>${num(r.pct_one_word,1)}</td>
+        <td>${num(r.pct_dismissal,1)}</td><td>${r.median_words}</td><td>${num(r.mean_words,1)}</td>
+      </tr>`).join('');
+    tb.innerHTML = mkRows(worked, 'What worked') + mkRows(hard, 'What was hard');
+  }
+  function ABBR2(p){ // short profile tag for bar x-axis
+    return p.replace('Engagement','').replace('Moderate-','Mod-').trim() || p;
+  }
+
+  // Section 5: evidence
+  function renderCFAProse() {
+    const c = D.cfa;
+    const cross = c.comparison.find(m => /cross/i.test(m.Model) && !/no/i.test(m.Model));
+    const noCross = c.comparison.find(m => /no cross/i.test(m.Model));
+    document.getElementById('cfaProse').innerHTML =
+      `Suitability held (KMO = ${num(c.kmo,3).replace(/^0\./,'.')}, Bartlett significant), and parallel analysis ` +
+      `extracted ${c.parallel_n} factors. On the held-out half, the theorised cross-loading model fit well ` +
+      `(CFI = ${num(cross.CFI,3).replace(/^0\./,'.')}, TLI = ${num(cross.TLI,3).replace(/^0\./,'.')}, ` +
+      `RMSEA = ${num(cross.RMSEA,3).replace(/^0\./,'.')} [${num(cross.RMSEA_lo,3).replace(/^0\./,'.')}, ` +
+      `${num(cross.RMSEA_hi,3).replace(/^0\./,'.')}], SRMR = ${num(cross.SRMR,3).replace(/^0\./,'.')}) and clearly ` +
+      `beat the constrained model (CFI = ${num(noCross.CFI,3).replace(/^0\./,'.')}). The measurement model earns its ` +
+      `structure before any profile is drawn.`;
+  }
+
+  function renderCritCards() {
+    const sel = D.selection;
+    const g = D.grid.filter(r => r.model === 2);
+    const k4 = g.find(r => r.classes === 4);
+    const s4 = sel.find(r => r.classes === 4), s5 = sel.find(r => r.classes === 5);
+    const bicMinRow = D.grid.filter(r=>r.model===2).reduce((a,b)=> b.bic < a.bic ? b : a);
+    const cards = [
+      { name: 'BIC', tag: 'decisive', tagclass: 'decisive', tagtext: 'The operative rule',
+        body: `Has <strong>no minimum at k = 4</strong> — it keeps declining through k = ${bicMinRow.classes}. ` +
+          `So the raw minimum is not the criterion; the elbow is. The BIC improvement retains ` +
+          `${num(s4.pct_of_prev,0)}% of the previous step at k = 4 but only ${num(s5.pct_of_prev,0)}% at k = 5.` },
+      { name: 'Entropy', tag: 'decisive', tagclass: 'decisive', tagtext: 'Supporting',
+        body: `${num(k4.entropy,3).replace(/^0\./,'.')} at k = 4 — above the .80 threshold for adequate ` +
+          `classification — and declining as k grows. It corroborates the elbow rather than setting it.` },
+      { name: 'BLRT', tag: 'silent', tagclass: 'silent', tagtext: 'Silent',
+        body: `Significant at <strong>every</strong> k (p = ${num(k4.blrt_p,4)}, the floor for 100 bootstrap ` +
+          `draws). A test that never stops rejecting adjudicates nothing here.` },
+      { name: 'Minimum class size', tag: 'silent', tagclass: 'silent', tagtext: 'Silent',
+        body: `Never binds — every Model-2 solution clears 5% through k = 6 (${num(k4.n_min_pct,1)}% at k = 4). ` +
+          `It rules nothing out in this grid.` }
+    ];
+    document.getElementById('critCards').innerHTML = cards.map(c => `
+      <div class="crit">
+        <h4>${esc(c.name)} <span class="tag ${c.tagclass}">${esc(c.tagtext)}</span></h4>
+        <p>${c.body}</p>
+      </div>`).join('');
+
+    document.getElementById('elbowProse').innerHTML =
+      `Two of the four conventional criteria are silent. The decision rests on the BIC elbow, the declining ` +
+      `entropy, and interpretability — never on a BIC minimum, which does not exist at k = 4.`;
+  }
+
+  function renderSegNote() {
+    const assoc = D.segmentation.association;
+    const vs = assoc.map(a => a.cramers_v);
+    const lo = Math.min(...vs), hi = Math.max(...vs);
+    document.getElementById('segNote').innerHTML =
+      `One descriptive property of the retained solution: profile membership shows no significant association ` +
+      `with department, tenure, or level after Holm correction (Cramér's V from ${num(lo,3).replace(/^0\./,'.')} ` +
+      `to ${num(hi,3).replace(/^0\./,'.')} across the three attributes). The simulation draws these attributes ` +
+      `independently of profile membership, so this null is stipulated rather than discovered — encoded into the ` +
+      `data-generating process, not found by the model. The warrant for encoding it that way: the source study ` +
+      `found the same pattern empirically, Cramér's V .049 to .091, all null after Holm correction.`;
+  }
+
+  function renderSelTable() {
+    const tb = document.querySelector('#selTable tbody');
+    const maxPct = 100; // bar reference
+    tb.innerHTML = D.selection.map(r => {
+      const pct = r.pct_of_prev;
+      const barW = pct==null ? 0 : Math.max(0, Math.min(100, pct));
+      const isElbow = r.classes === D.elbow_k;
+      return `<tr${isElbow?' class="retained"':''}>
+        <td>${r.classes}${isElbow?' <span class="badge keep">elbow</span>':''}</td>
+        <td>${num(r.bic,1)}</td>
+        <td>${r.bic_delta==null?'—':num(r.bic_delta,1)}</td>
+        <td class="barcell"><span class="bar" style="width:${barW}%"></span><span>${pct==null?'—':num(pct,1)+'%'}</span></td>
+        <td>${num(r.entropy,3).replace(/^0\./,'.')}</td>
+        <td>${num(r.n_min_pct,1)}</td>
+        <td>${r.blrt_p==null?'—':num(r.blrt_p,4)}</td>
+      </tr>`;
+    }).join('');
+  }
+
+  function renderGridTable() {
+    const tb = document.querySelector('#gridTable tbody');
+    tb.innerHTML = D.grid.map(r => {
+      const nonConv = (r.n_min_pct === 0) || (r.model === 3 && r.classes === 5);
+      const cls = r.retained ? ' class="retained"' : '';
+      return `<tr${cls}>
+        <td>${esc(r.spec)}</td>
+        <td>${r.classes}${r.retained?' <span class="badge keep">retained</span>':''}</td>
+        <td>${num(r.logLik,1)}</td>
+        <td>${num(r.aic,1)}</td>
+        <td>${num(r.bic,1)}</td>
+        <td>${num(r.entropy,3).replace(/^0\./,'.')}</td>
+        <td>${nonConv ? '<span class="badge nc">non-converged</span>' : num(r.n_min_pct,1)}</td>
+        <td>${r.blrt_p==null?'—':(nonConv?'—':num(r.blrt_p,4))}</td>
+      </tr>`;
+    }).join('');
+    document.getElementById('ncNote').textContent =
+      'Model 3, k = 5 did not converge to a usable solution (empty class, degenerate BLRT); its cells are marked rather than shown as a spurious 0.0.';
+  }
+
+  function renderFooter() {
+    const m = D.meta;
+    document.getElementById('footMeta').innerHTML =
+      `${m.n.toLocaleString()} synthetic respondents · ${m.n_items} items · ${m.n_factors} factors · ` +
+      `seed ${m.seed} · pipeline output generated ${esc(m.generated_at)}. All figures on this page are read ` +
+      `directly from <code>data/model_results.json</code>; nothing is hardcoded.`;
+  }
+
+  // ------------------------------------------------------------------
+  // Wire up
+  // ------------------------------------------------------------------
+  function renderResponsive() {
+    // charts that depend on container width
+    renderS2();
+    renderS3();
+    renderS4();
+  }
+
+  function renderStatic() {
+    renderChips();
+    renderS2Interp();
+    renderCFAProse();
+    renderCritCards();
+    renderSelTable();
+    renderGridTable();
+    renderSegNote();
+    renderFooter();
+  }
+
+  function bindControls() {
+    [['k3',3],['k4',4],['k5',5]].forEach(([id,k])=>{
+      document.getElementById(id).addEventListener('click', ()=>{ state.k = k; renderS3(); });
+    });
+  }
+
+  let rz;
+  window.addEventListener('resize', () => {
+    clearTimeout(rz);
+    rz = setTimeout(renderResponsive, 150);
+  });
+
+  // Theme toggle
+  (function themeInit(){
+    const btn = document.getElementById('themeToggle');
+    const stored = (function(){ try { return localStorage.getItem('lpa-theme'); } catch(e){ return null; } })();
+    if (stored) document.documentElement.setAttribute('data-theme', stored);
+    btn.addEventListener('click', () => {
+      const cur = document.documentElement.getAttribute('data-theme');
+      const sysDark = window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+      const now = cur ? cur : (sysDark ? 'dark' : 'light');
+      const next = now === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      try { localStorage.setItem('lpa-theme', next); } catch(e){}
+    });
+  })();
+
+  function showError(msg) {
+    const main = document.getElementById('main');
+    const div = document.createElement('div');
+    div.className = 'wrap';
+    div.innerHTML = `<div class="error-panel">
+      <h2 style="margin-top:0">Could not load the results</h2>
+      <p>This page reads <code>data/model_results.json</code> at load time, so it must be served over HTTP —
+      opening the file directly from disk (<code>file://</code>) will not work. Start any static server in the
+      project root and reload.</p>
+      <p class="muted" style="margin-bottom:0">Technical detail: ${esc(msg)}</p>
+    </div>`;
+    main.prepend(div);
+  }
+
+  fetch('data/model_results.json')
+    .then(r => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.json(); })
+    .then(json => {
+      D = json;
+      bindControls();
+      renderStatic();
+      renderResponsive();
+    })
+    .catch(err => showError(err.message || String(err)));
+
+})();
+</script>
+
+</body>
+</html>

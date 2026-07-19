@@ -1,0 +1,1488 @@
+{
+  "meta": {
+    "n": 1400,
+    "n_items": 15,
+    "n_factors": 5,
+    "seed": 20260718,
+    "sd_mult": {
+      "Clarity": 1.8,
+      "Enablement": 1.8,
+      "Engagement": 0.65,
+      "Impact": 1.1,
+      "Autonomy": 0.7
+    },
+    "generated_at": "2026-07-18",
+    "synthetic": true
+  },
+  "factors": ["Clarity", "Enablement", "Engagement", "Impact", "Autonomy"],
+  "items": [
+    {
+      "id": "i1",
+      "text": "I understand what is expected of me in my role.",
+      "factors": ["Clarity", "Enablement"]
+    },
+    {
+      "id": "i2",
+      "text": "Something about how work is organized makes it hard to do my best. (R)",
+      "factors": "Clarity"
+    },
+    {
+      "id": "i3",
+      "text": "I can draw on skills and experience I already have to do this work.",
+      "factors": "Enablement"
+    },
+    {
+      "id": "i4",
+      "text": "The training and onboarding I received prepared me for this work.",
+      "factors": "Enablement"
+    },
+    {
+      "id": "i5",
+      "text": "I want to learn more about the area my work touches.",
+      "factors": "Engagement"
+    },
+    {
+      "id": "i6",
+      "text": "I find the substance of my work interesting.",
+      "factors": "Engagement"
+    },
+    {
+      "id": "i7",
+      "text": "I want to tell people outside work about what I am working on.",
+      "factors": ["Engagement", "Autonomy"]
+    },
+    {
+      "id": "i8",
+      "text": "The work I do connects to things I care about personally.",
+      "factors": "Autonomy"
+    },
+    {
+      "id": "i9",
+      "text": "My work relates to a problem that matters beyond this company.",
+      "factors": "Impact"
+    },
+    {
+      "id": "i10",
+      "text": "If my team's work were better understood, the wider org would benefit.",
+      "factors": "Impact"
+    },
+    {
+      "id": "i11",
+      "text": "This work has changed how I think about the problem space.",
+      "factors": "Autonomy"
+    },
+    {
+      "id": "i12",
+      "text": "I can apply what I am learning here to where I want to go next.",
+      "factors": "Autonomy"
+    },
+    {
+      "id": "i13",
+      "text": "I can use what I have learned here to help other people.",
+      "factors": "Autonomy"
+    },
+    {
+      "id": "i14",
+      "text": "It is clear to me how my work is evaluated.",
+      "factors": "Clarity"
+    },
+    {
+      "id": "i15",
+      "text": "The problems my team works on are worth solving.",
+      "factors": "Impact"
+    }
+  ],
+  "cfa": {
+    "kmo": 0.874,
+    "bartlett": {
+      "chisq": 2480.61,
+      "df": 105,
+      "p": 0
+    },
+    "parallel_n": 5,
+    "comparison": [
+      {
+        "Model": "Cross-loading",
+        "chisq": 85.16,
+        "df": 78,
+        "CFI": 0.997,
+        "TLI": 0.996,
+        "RMSEA": 0.011,
+        "RMSEA_lo": 0,
+        "RMSEA_hi": 0.025,
+        "SRMR": 0.021
+      },
+      {
+        "Model": "No cross-loading",
+        "chisq": 186.38,
+        "df": 80,
+        "CFI": 0.959,
+        "TLI": 0.946,
+        "RMSEA": 0.044,
+        "RMSEA_lo": 0.035,
+        "RMSEA_hi": 0.052,
+        "SRMR": 0.034
+      }
+    ],
+    "loadings": [
+      {
+        "factor": "Clarity",
+        "item": "i1",
+        "beta": 0.571,
+        "se": 0.038,
+        "z": 15.085,
+        "p": 0
+      },
+      {
+        "factor": "Clarity",
+        "item": "i2",
+        "beta": 0.653,
+        "se": 0.034,
+        "z": 19.207,
+        "p": 0
+      },
+      {
+        "factor": "Clarity",
+        "item": "i14",
+        "beta": 0.709,
+        "se": 0.035,
+        "z": 20.363,
+        "p": 0
+      },
+      {
+        "factor": "Enablement",
+        "item": "i1",
+        "beta": 0.402,
+        "se": 0.043,
+        "z": 9.344,
+        "p": 0
+      },
+      {
+        "factor": "Enablement",
+        "item": "i3",
+        "beta": 0.718,
+        "se": 0.04,
+        "z": 17.833,
+        "p": 0
+      },
+      {
+        "factor": "Enablement",
+        "item": "i4",
+        "beta": 0.629,
+        "se": 0.04,
+        "z": 15.787,
+        "p": 0
+      },
+      {
+        "factor": "Engagement",
+        "item": "i5",
+        "beta": 0.787,
+        "se": 0.024,
+        "z": 32.931,
+        "p": 0
+      },
+      {
+        "factor": "Engagement",
+        "item": "i6",
+        "beta": 0.744,
+        "se": 0.026,
+        "z": 28.95,
+        "p": 0
+      },
+      {
+        "factor": "Engagement",
+        "item": "i7",
+        "beta": 0.367,
+        "se": 0.067,
+        "z": 5.472,
+        "p": 4.4491e-08
+      },
+      {
+        "factor": "Impact",
+        "item": "i9",
+        "beta": 0.59,
+        "se": 0.037,
+        "z": 16.066,
+        "p": 0
+      },
+      {
+        "factor": "Impact",
+        "item": "i10",
+        "beta": 0.637,
+        "se": 0.034,
+        "z": 18.826,
+        "p": 0
+      },
+      {
+        "factor": "Impact",
+        "item": "i15",
+        "beta": 0.676,
+        "se": 0.033,
+        "z": 20.356,
+        "p": 0
+      },
+      {
+        "factor": "Autonomy",
+        "item": "i7",
+        "beta": 0.334,
+        "se": 0.068,
+        "z": 4.898,
+        "p": 9.696e-07
+      },
+      {
+        "factor": "Autonomy",
+        "item": "i8",
+        "beta": 0.554,
+        "se": 0.032,
+        "z": 17.532,
+        "p": 0
+      },
+      {
+        "factor": "Autonomy",
+        "item": "i11",
+        "beta": 0.566,
+        "se": 0.032,
+        "z": 17.702,
+        "p": 0
+      },
+      {
+        "factor": "Autonomy",
+        "item": "i12",
+        "beta": 0.771,
+        "se": 0.022,
+        "z": 34.832,
+        "p": 0
+      },
+      {
+        "factor": "Autonomy",
+        "item": "i13",
+        "beta": 0.731,
+        "se": 0.025,
+        "z": 29.309,
+        "p": 0
+      }
+    ]
+  },
+  "scores": {
+    "descriptives": [
+      {
+        "Factor": "w_Autonomy",
+        "N": 1400,
+        "Mean": 0,
+        "SD": 0.9,
+        "Min": -2.26,
+        "Max": 1.59
+      },
+      {
+        "Factor": "w_Clarity",
+        "N": 1400,
+        "Mean": -0,
+        "SD": 0.828,
+        "Min": -2.05,
+        "Max": 1.52
+      },
+      {
+        "Factor": "w_Enablement",
+        "N": 1400,
+        "Mean": 0,
+        "SD": 0.824,
+        "Min": -2,
+        "Max": 1.51
+      },
+      {
+        "Factor": "w_Engagement",
+        "N": 1400,
+        "Mean": -0,
+        "SD": 0.898,
+        "Min": -2.11,
+        "Max": 1.53
+      },
+      {
+        "Factor": "w_Impact",
+        "N": 1400,
+        "Mean": -0,
+        "SD": 0.84,
+        "Min": -2.18,
+        "Max": 1.51
+      }
+    ],
+    "correlations": [
+      {
+        "factor": "Clarity",
+        "Clarity": 1,
+        "Enablement": 0.297,
+        "Engagement": 0.525,
+        "Impact": 0.399,
+        "Autonomy": 0.511,
+        "_row": "w_Clarity"
+      },
+      {
+        "factor": "Enablement",
+        "Clarity": 0.297,
+        "Enablement": 1,
+        "Engagement": 0.521,
+        "Impact": 0.39,
+        "Autonomy": 0.448,
+        "_row": "w_Enablement"
+      },
+      {
+        "factor": "Engagement",
+        "Clarity": 0.525,
+        "Enablement": 0.521,
+        "Engagement": 1,
+        "Impact": 0.778,
+        "Autonomy": 0.887,
+        "_row": "w_Engagement"
+      },
+      {
+        "factor": "Impact",
+        "Clarity": 0.399,
+        "Enablement": 0.39,
+        "Engagement": 0.778,
+        "Impact": 1,
+        "Autonomy": 0.775,
+        "_row": "w_Impact"
+      },
+      {
+        "factor": "Autonomy",
+        "Clarity": 0.511,
+        "Enablement": 0.448,
+        "Engagement": 0.887,
+        "Impact": 0.775,
+        "Autonomy": 1,
+        "_row": "w_Autonomy"
+      }
+    ]
+  },
+  "grid": [
+    {
+      "model": 1,
+      "spec": "Equal variances, zero covariances",
+      "classes": 1,
+      "logLik": -8852.9,
+      "aic": 17725.9,
+      "bic": 17778.3,
+      "entropy": 1,
+      "n_min_pct": 100,
+      "blrt_p": null,
+      "retained": false
+    },
+    {
+      "model": 1,
+      "spec": "Equal variances, zero covariances",
+      "classes": 2,
+      "logLik": -7392.5,
+      "aic": 14817.1,
+      "bic": 14901,
+      "entropy": 0.881,
+      "n_min_pct": 41.3,
+      "blrt_p": 0.0099,
+      "retained": false
+    },
+    {
+      "model": 1,
+      "spec": "Equal variances, zero covariances",
+      "classes": 3,
+      "logLik": -6864.4,
+      "aic": 13772.9,
+      "bic": 13888.2,
+      "entropy": 0.877,
+      "n_min_pct": 23.2,
+      "blrt_p": 0.0099,
+      "retained": false
+    },
+    {
+      "model": 1,
+      "spec": "Equal variances, zero covariances",
+      "classes": 4,
+      "logLik": -6675.8,
+      "aic": 13407.6,
+      "bic": 13554.5,
+      "entropy": 0.845,
+      "n_min_pct": 15.6,
+      "blrt_p": 0.0099,
+      "retained": false
+    },
+    {
+      "model": 1,
+      "spec": "Equal variances, zero covariances",
+      "classes": 5,
+      "logLik": -6584.3,
+      "aic": 13236.6,
+      "bic": 13414.9,
+      "entropy": 0.819,
+      "n_min_pct": 11.8,
+      "blrt_p": 0.0099,
+      "retained": false
+    },
+    {
+      "model": 1,
+      "spec": "Equal variances, zero covariances",
+      "classes": 6,
+      "logLik": -6529.8,
+      "aic": 13139.6,
+      "bic": 13349.3,
+      "entropy": 0.817,
+      "n_min_pct": 5.8,
+      "blrt_p": 0.0099,
+      "retained": false
+    },
+    {
+      "model": 2,
+      "spec": "Varying variances, zero covariances",
+      "classes": 1,
+      "logLik": -8852.9,
+      "aic": 17725.9,
+      "bic": 17778.3,
+      "entropy": 1,
+      "n_min_pct": 100,
+      "blrt_p": null,
+      "retained": false
+    },
+    {
+      "model": 2,
+      "spec": "Varying variances, zero covariances",
+      "classes": 2,
+      "logLik": -7349.7,
+      "aic": 14741.4,
+      "bic": 14851.5,
+      "entropy": 0.877,
+      "n_min_pct": 47.1,
+      "blrt_p": 0.0099,
+      "retained": false
+    },
+    {
+      "model": 2,
+      "spec": "Varying variances, zero covariances",
+      "classes": 3,
+      "logLik": -6815.5,
+      "aic": 13695,
+      "bic": 13862.8,
+      "entropy": 0.869,
+      "n_min_pct": 26.3,
+      "blrt_p": 0.0099,
+      "retained": false
+    },
+    {
+      "model": 2,
+      "spec": "Varying variances, zero covariances",
+      "classes": 4,
+      "logLik": -6597.9,
+      "aic": 13281.7,
+      "bic": 13507.2,
+      "entropy": 0.854,
+      "n_min_pct": 17.7,
+      "blrt_p": 0.0099,
+      "retained": true
+    },
+    {
+      "model": 2,
+      "spec": "Varying variances, zero covariances",
+      "classes": 5,
+      "logLik": -6524.4,
+      "aic": 13156.8,
+      "bic": 13440,
+      "entropy": 0.839,
+      "n_min_pct": 11.3,
+      "blrt_p": 0.0099,
+      "retained": false
+    },
+    {
+      "model": 2,
+      "spec": "Varying variances, zero covariances",
+      "classes": 6,
+      "logLik": -6412.2,
+      "aic": 12954.4,
+      "bic": 13295.2,
+      "entropy": 0.841,
+      "n_min_pct": 8.6,
+      "blrt_p": 0.0099,
+      "retained": false
+    },
+    {
+      "model": 3,
+      "spec": "Equal variances, equal covariances",
+      "classes": 1,
+      "logLik": -6596.6,
+      "aic": 13233.1,
+      "bic": 13338,
+      "entropy": 1,
+      "n_min_pct": 100,
+      "blrt_p": null,
+      "retained": false
+    },
+    {
+      "model": 3,
+      "spec": "Equal variances, equal covariances",
+      "classes": 2,
+      "logLik": -6511.6,
+      "aic": 13075.2,
+      "bic": 13211.5,
+      "entropy": 0.719,
+      "n_min_pct": 39.6,
+      "blrt_p": 0.0099,
+      "retained": false
+    },
+    {
+      "model": 3,
+      "spec": "Equal variances, equal covariances",
+      "classes": 3,
+      "logLik": -6510.2,
+      "aic": 13084.3,
+      "bic": 13252.1,
+      "entropy": 0.578,
+      "n_min_pct": 8.2,
+      "blrt_p": 0.6139,
+      "retained": false
+    },
+    {
+      "model": 3,
+      "spec": "Equal variances, equal covariances",
+      "classes": 4,
+      "logLik": -6445.8,
+      "aic": 12967.7,
+      "bic": 13167,
+      "entropy": 0.702,
+      "n_min_pct": 19.6,
+      "blrt_p": 0.0099,
+      "retained": false
+    },
+    {
+      "model": 3,
+      "spec": "Equal variances, equal covariances",
+      "classes": 5,
+      "logLik": -6446,
+      "aic": 12979.9,
+      "bic": 13210.7,
+      "entropy": 0.605,
+      "n_min_pct": 0,
+      "blrt_p": 1,
+      "retained": false
+    },
+    {
+      "model": 3,
+      "spec": "Equal variances, equal covariances",
+      "classes": 6,
+      "logLik": -6445.8,
+      "aic": 12991.6,
+      "bic": 13253.8,
+      "entropy": 0.653,
+      "n_min_pct": 9,
+      "blrt_p": 0.9604,
+      "retained": false
+    }
+  ],
+  "selection": [
+    {
+      "classes": 1,
+      "bic": 17778.3,
+      "bic_delta": null,
+      "pct_of_prev": null,
+      "entropy": 1,
+      "n_min_pct": 100,
+      "blrt_p": null
+    },
+    {
+      "classes": 2,
+      "bic": 14851.5,
+      "bic_delta": -2926.8,
+      "pct_of_prev": null,
+      "entropy": 0.877,
+      "n_min_pct": 47.1,
+      "blrt_p": 0.0099
+    },
+    {
+      "classes": 3,
+      "bic": 13862.8,
+      "bic_delta": -988.7,
+      "pct_of_prev": 33.8,
+      "entropy": 0.869,
+      "n_min_pct": 26.3,
+      "blrt_p": 0.0099
+    },
+    {
+      "classes": 4,
+      "bic": 13507.2,
+      "bic_delta": -355.6,
+      "pct_of_prev": 36,
+      "entropy": 0.854,
+      "n_min_pct": 17.7,
+      "blrt_p": 0.0099
+    },
+    {
+      "classes": 5,
+      "bic": 13440,
+      "bic_delta": -67.2,
+      "pct_of_prev": 18.9,
+      "entropy": 0.839,
+      "n_min_pct": 11.3,
+      "blrt_p": 0.0099
+    },
+    {
+      "classes": 6,
+      "bic": 13295.2,
+      "bic_delta": -144.8,
+      "pct_of_prev": 215.5,
+      "entropy": 0.841,
+      "n_min_pct": 8.6,
+      "blrt_p": 0.0099
+    }
+  ],
+  "elbow_k": 4,
+  "solutions": {
+    "3": [
+      {
+        "label": "Profile 1",
+        "n": 368,
+        "pct": 26.3,
+        "means": [-0.62, -0.616, -1.156, -0.97, -1.144]
+      },
+      {
+        "label": "Profile 2",
+        "n": 564,
+        "pct": 40.3,
+        "means": [-0.018, -0.006, -0.031, -0.003, -0.032]
+      },
+      {
+        "label": "Profile 3",
+        "n": 468,
+        "pct": 33.4,
+        "means": [0.509, 0.491, 0.946, 0.767, 0.938]
+      }
+    ],
+    "4": [
+      {
+        "label": "Low Engagement",
+        "n": 266,
+        "pct": 19,
+        "means": [-0.679, -0.689, -1.332, -1.112, -1.299]
+      },
+      {
+        "label": "Moderate-Low Engagement",
+        "n": 443,
+        "pct": 31.6,
+        "means": [-0.202, -0.147, -0.358, -0.258, -0.364]
+      },
+      {
+        "label": "Moderate-High Engagement",
+        "n": 443,
+        "pct": 31.6,
+        "means": [0.209, 0.234, 0.517, 0.383, 0.501]
+      },
+      {
+        "label": "High Engagement",
+        "n": 248,
+        "pct": 17.7,
+        "means": [0.716, 0.583, 1.145, 0.97, 1.15]
+      }
+    ],
+    "5": [
+      {
+        "label": "Profile 1",
+        "n": 249,
+        "pct": 17.8,
+        "means": [-0.692, -0.706, -1.358, -1.138, -1.333]
+      },
+      {
+        "label": "Profile 2",
+        "n": 415,
+        "pct": 29.6,
+        "means": [-0.233, -0.166, -0.426, -0.326, -0.422]
+      },
+      {
+        "label": "Profile 3",
+        "n": 406,
+        "pct": 29,
+        "means": [0.182, 0.036, 0.408, 0.334, 0.422]
+      },
+      {
+        "label": "Profile 4",
+        "n": 158,
+        "pct": 11.3,
+        "means": [0.417, 0.96, 0.876, 0.596, 0.799]
+      },
+      {
+        "label": "Profile 5",
+        "n": 172,
+        "pct": 12.3,
+        "means": [0.751, 0.456, 1.227, 1.097, 1.218]
+      }
+    ]
+  },
+  "final": {
+    "model": 2,
+    "classes": 4,
+    "avepp": [
+      {
+        "profile": "Moderate-High Engagement",
+        "n": 443,
+        "avepp": 0.902
+      },
+      {
+        "profile": "Low Engagement",
+        "n": 266,
+        "avepp": 0.942
+      },
+      {
+        "profile": "High Engagement",
+        "n": 248,
+        "avepp": 0.918
+      },
+      {
+        "profile": "Moderate-Low Engagement",
+        "n": 443,
+        "avepp": 0.913
+      }
+    ],
+    "recovery": [
+      {
+        "true": "Low Engagement",
+        "estimated": "Low Engagement",
+        "n": 189
+      },
+      {
+        "true": "Moderate-Low Engagement",
+        "estimated": "Low Engagement",
+        "n": 77
+      },
+      {
+        "true": "Moderate-High Engagement",
+        "estimated": "Low Engagement",
+        "n": 0
+      },
+      {
+        "true": "High Engagement",
+        "estimated": "Low Engagement",
+        "n": 0
+      },
+      {
+        "true": "Low Engagement",
+        "estimated": "Moderate-Low Engagement",
+        "n": 32
+      },
+      {
+        "true": "Moderate-Low Engagement",
+        "estimated": "Moderate-Low Engagement",
+        "n": 355
+      },
+      {
+        "true": "Moderate-High Engagement",
+        "estimated": "Moderate-Low Engagement",
+        "n": 56
+      },
+      {
+        "true": "High Engagement",
+        "estimated": "Moderate-Low Engagement",
+        "n": 0
+      },
+      {
+        "true": "Low Engagement",
+        "estimated": "Moderate-High Engagement",
+        "n": 0
+      },
+      {
+        "true": "Moderate-Low Engagement",
+        "estimated": "Moderate-High Engagement",
+        "n": 84
+      },
+      {
+        "true": "Moderate-High Engagement",
+        "estimated": "Moderate-High Engagement",
+        "n": 330
+      },
+      {
+        "true": "High Engagement",
+        "estimated": "Moderate-High Engagement",
+        "n": 29
+      },
+      {
+        "true": "Low Engagement",
+        "estimated": "High Engagement",
+        "n": 0
+      },
+      {
+        "true": "Moderate-Low Engagement",
+        "estimated": "High Engagement",
+        "n": 0
+      },
+      {
+        "true": "Moderate-High Engagement",
+        "estimated": "High Engagement",
+        "n": 103
+      },
+      {
+        "true": "High Engagement",
+        "estimated": "High Engagement",
+        "n": 145
+      }
+    ],
+    "recovery_rate": 0.728
+  },
+  "segmentation": {
+    "segments": [
+      {
+        "attribute": "department",
+        "segment": "Content",
+        "n": 288,
+        "w_Clarity": 0.06,
+        "w_Enablement": -0.057,
+        "w_Engagement": -0.032,
+        "w_Impact": 0.027,
+        "w_Autonomy": -0.02
+      },
+      {
+        "attribute": "department",
+        "segment": "Data & Analytics",
+        "n": 134,
+        "w_Clarity": -0.041,
+        "w_Enablement": 0.005,
+        "w_Engagement": -0.1,
+        "w_Impact": -0.105,
+        "w_Autonomy": -0.05
+      },
+      {
+        "attribute": "department",
+        "segment": "Engineering",
+        "n": 380,
+        "w_Clarity": 0.007,
+        "w_Enablement": -0.025,
+        "w_Engagement": 0.004,
+        "w_Impact": 0.003,
+        "w_Autonomy": 0.013
+      },
+      {
+        "attribute": "department",
+        "segment": "Marketing",
+        "n": 215,
+        "w_Clarity": -0.021,
+        "w_Enablement": 0.032,
+        "w_Engagement": 0.03,
+        "w_Impact": 0.041,
+        "w_Autonomy": 0.02
+      },
+      {
+        "attribute": "department",
+        "segment": "Operations",
+        "n": 194,
+        "w_Clarity": -0.025,
+        "w_Enablement": 0.071,
+        "w_Engagement": 0.089,
+        "w_Impact": 0.002,
+        "w_Autonomy": 0.035
+      },
+      {
+        "attribute": "department",
+        "segment": "Product",
+        "n": 189,
+        "w_Clarity": -0.027,
+        "w_Enablement": 0.025,
+        "w_Engagement": -0.015,
+        "w_Impact": -0.022,
+        "w_Autonomy": -0.02
+      },
+      {
+        "attribute": "tenure",
+        "segment": "1-3 years",
+        "n": 449,
+        "w_Clarity": 0.027,
+        "w_Enablement": -0.039,
+        "w_Engagement": -0.03,
+        "w_Impact": -0.028,
+        "w_Autonomy": -0.019
+      },
+      {
+        "attribute": "tenure",
+        "segment": "3-5 years",
+        "n": 380,
+        "w_Clarity": 0.025,
+        "w_Enablement": 0.025,
+        "w_Engagement": 0.03,
+        "w_Impact": 0.008,
+        "w_Autonomy": 0.036
+      },
+      {
+        "attribute": "tenure",
+        "segment": "5+ years",
+        "n": 241,
+        "w_Clarity": 0.011,
+        "w_Enablement": 0.048,
+        "w_Engagement": 0.066,
+        "w_Impact": 0.053,
+        "w_Autonomy": 0.034
+      },
+      {
+        "attribute": "tenure",
+        "segment": "Under 1 year",
+        "n": 330,
+        "w_Clarity": -0.074,
+        "w_Enablement": -0.011,
+        "w_Engagement": -0.043,
+        "w_Impact": -0.01,
+        "w_Autonomy": -0.041
+      },
+      {
+        "attribute": "level",
+        "segment": "Individual contributor",
+        "n": 612,
+        "w_Clarity": 0.006,
+        "w_Enablement": 0.01,
+        "w_Engagement": 0.016,
+        "w_Impact": 0.015,
+        "w_Autonomy": 0.037
+      },
+      {
+        "attribute": "level",
+        "segment": "Manager",
+        "n": 221,
+        "w_Clarity": 0.02,
+        "w_Enablement": 0.074,
+        "w_Engagement": 0.053,
+        "w_Impact": 0.054,
+        "w_Autonomy": 0.021
+      },
+      {
+        "attribute": "level",
+        "segment": "Senior IC",
+        "n": 567,
+        "w_Clarity": -0.014,
+        "w_Enablement": -0.039,
+        "w_Engagement": -0.038,
+        "w_Impact": -0.037,
+        "w_Autonomy": -0.049
+      }
+    ],
+    "gap_comparison": [
+      {
+        "attribute": "department",
+        "w_Autonomy": 0.085,
+        "w_Clarity": 0.101,
+        "w_Enablement": 0.128,
+        "w_Engagement": 0.189,
+        "w_Impact": 0.146,
+        "widest": 0.189
+      },
+      {
+        "attribute": "level",
+        "w_Autonomy": 0.086,
+        "w_Clarity": 0.034,
+        "w_Enablement": 0.113,
+        "w_Engagement": 0.091,
+        "w_Impact": 0.091,
+        "widest": 0.113
+      },
+      {
+        "attribute": "tenure",
+        "w_Autonomy": 0.077,
+        "w_Clarity": 0.101,
+        "w_Enablement": 0.087,
+        "w_Engagement": 0.109,
+        "w_Impact": 0.081,
+        "widest": 0.109
+      },
+      {
+        "attribute": "PROFILE",
+        "w_Autonomy": 2.45,
+        "w_Clarity": 1.395,
+        "w_Enablement": 1.272,
+        "w_Engagement": 2.477,
+        "w_Impact": 2.082,
+        "widest": 2.477
+      }
+    ],
+    "max_conventional": 0.189,
+    "max_profile": 2.477,
+    "ratio": 13.1,
+    "association": [
+      {
+        "attribute": "department",
+        "chisq": 12.03,
+        "df": 15,
+        "p_raw": 0.6766,
+        "cramers_v": 0.054,
+        "n": 1400,
+        "p_adj": 0.6766,
+        "significant": false
+      },
+      {
+        "attribute": "tenure",
+        "chisq": 10.29,
+        "df": 9,
+        "p_raw": 0.3272,
+        "cramers_v": 0.05,
+        "n": 1400,
+        "p_adj": 0.6544,
+        "significant": false
+      },
+      {
+        "attribute": "level",
+        "chisq": 11.07,
+        "df": 6,
+        "p_raw": 0.0862,
+        "cramers_v": 0.063,
+        "n": 1400,
+        "p_adj": 0.2587,
+        "significant": false
+      }
+    ],
+    "composition": [
+      {
+        "attribute": "department",
+        "segment": "Content",
+        "Profile": "Low Engagement",
+        "n": 64,
+        "pct": 22.2
+      },
+      {
+        "attribute": "department",
+        "segment": "Content",
+        "Profile": "Moderate-Low Engagement",
+        "n": 82,
+        "pct": 28.5
+      },
+      {
+        "attribute": "department",
+        "segment": "Content",
+        "Profile": "Moderate-High Engagement",
+        "n": 89,
+        "pct": 30.9
+      },
+      {
+        "attribute": "department",
+        "segment": "Content",
+        "Profile": "High Engagement",
+        "n": 53,
+        "pct": 18.4
+      },
+      {
+        "attribute": "department",
+        "segment": "Data & Analytics",
+        "Profile": "Low Engagement",
+        "n": 28,
+        "pct": 20.9
+      },
+      {
+        "attribute": "department",
+        "segment": "Data & Analytics",
+        "Profile": "Moderate-Low Engagement",
+        "n": 48,
+        "pct": 35.8
+      },
+      {
+        "attribute": "department",
+        "segment": "Data & Analytics",
+        "Profile": "Moderate-High Engagement",
+        "n": 35,
+        "pct": 26.1
+      },
+      {
+        "attribute": "department",
+        "segment": "Data & Analytics",
+        "Profile": "High Engagement",
+        "n": 23,
+        "pct": 17.2
+      },
+      {
+        "attribute": "department",
+        "segment": "Engineering",
+        "Profile": "Low Engagement",
+        "n": 67,
+        "pct": 17.6
+      },
+      {
+        "attribute": "department",
+        "segment": "Engineering",
+        "Profile": "Moderate-Low Engagement",
+        "n": 119,
+        "pct": 31.3
+      },
+      {
+        "attribute": "department",
+        "segment": "Engineering",
+        "Profile": "Moderate-High Engagement",
+        "n": 129,
+        "pct": 33.9
+      },
+      {
+        "attribute": "department",
+        "segment": "Engineering",
+        "Profile": "High Engagement",
+        "n": 65,
+        "pct": 17.1
+      },
+      {
+        "attribute": "department",
+        "segment": "Marketing",
+        "Profile": "Low Engagement",
+        "n": 38,
+        "pct": 17.7
+      },
+      {
+        "attribute": "department",
+        "segment": "Marketing",
+        "Profile": "Moderate-Low Engagement",
+        "n": 75,
+        "pct": 34.9
+      },
+      {
+        "attribute": "department",
+        "segment": "Marketing",
+        "Profile": "Moderate-High Engagement",
+        "n": 62,
+        "pct": 28.8
+      },
+      {
+        "attribute": "department",
+        "segment": "Marketing",
+        "Profile": "High Engagement",
+        "n": 40,
+        "pct": 18.6
+      },
+      {
+        "attribute": "department",
+        "segment": "Operations",
+        "Profile": "Low Engagement",
+        "n": 28,
+        "pct": 14.4
+      },
+      {
+        "attribute": "department",
+        "segment": "Operations",
+        "Profile": "Moderate-Low Engagement",
+        "n": 63,
+        "pct": 32.5
+      },
+      {
+        "attribute": "department",
+        "segment": "Operations",
+        "Profile": "Moderate-High Engagement",
+        "n": 70,
+        "pct": 36.1
+      },
+      {
+        "attribute": "department",
+        "segment": "Operations",
+        "Profile": "High Engagement",
+        "n": 33,
+        "pct": 17
+      },
+      {
+        "attribute": "department",
+        "segment": "Product",
+        "Profile": "Low Engagement",
+        "n": 41,
+        "pct": 21.7
+      },
+      {
+        "attribute": "department",
+        "segment": "Product",
+        "Profile": "Moderate-Low Engagement",
+        "n": 56,
+        "pct": 29.6
+      },
+      {
+        "attribute": "department",
+        "segment": "Product",
+        "Profile": "Moderate-High Engagement",
+        "n": 58,
+        "pct": 30.7
+      },
+      {
+        "attribute": "department",
+        "segment": "Product",
+        "Profile": "High Engagement",
+        "n": 34,
+        "pct": 18
+      },
+      {
+        "attribute": "tenure",
+        "segment": "1-3 years",
+        "Profile": "Low Engagement",
+        "n": 89,
+        "pct": 19.8
+      },
+      {
+        "attribute": "tenure",
+        "segment": "1-3 years",
+        "Profile": "Moderate-Low Engagement",
+        "n": 142,
+        "pct": 31.6
+      },
+      {
+        "attribute": "tenure",
+        "segment": "1-3 years",
+        "Profile": "Moderate-High Engagement",
+        "n": 142,
+        "pct": 31.6
+      },
+      {
+        "attribute": "tenure",
+        "segment": "1-3 years",
+        "Profile": "High Engagement",
+        "n": 76,
+        "pct": 16.9
+      },
+      {
+        "attribute": "tenure",
+        "segment": "3-5 years",
+        "Profile": "Low Engagement",
+        "n": 65,
+        "pct": 17.1
+      },
+      {
+        "attribute": "tenure",
+        "segment": "3-5 years",
+        "Profile": "Moderate-Low Engagement",
+        "n": 120,
+        "pct": 31.6
+      },
+      {
+        "attribute": "tenure",
+        "segment": "3-5 years",
+        "Profile": "Moderate-High Engagement",
+        "n": 130,
+        "pct": 34.2
+      },
+      {
+        "attribute": "tenure",
+        "segment": "3-5 years",
+        "Profile": "High Engagement",
+        "n": 65,
+        "pct": 17.1
+      },
+      {
+        "attribute": "tenure",
+        "segment": "5+ years",
+        "Profile": "Low Engagement",
+        "n": 36,
+        "pct": 14.9
+      },
+      {
+        "attribute": "tenure",
+        "segment": "5+ years",
+        "Profile": "Moderate-Low Engagement",
+        "n": 86,
+        "pct": 35.7
+      },
+      {
+        "attribute": "tenure",
+        "segment": "5+ years",
+        "Profile": "Moderate-High Engagement",
+        "n": 76,
+        "pct": 31.5
+      },
+      {
+        "attribute": "tenure",
+        "segment": "5+ years",
+        "Profile": "High Engagement",
+        "n": 43,
+        "pct": 17.8
+      },
+      {
+        "attribute": "tenure",
+        "segment": "Under 1 year",
+        "Profile": "Low Engagement",
+        "n": 76,
+        "pct": 23
+      },
+      {
+        "attribute": "tenure",
+        "segment": "Under 1 year",
+        "Profile": "Moderate-Low Engagement",
+        "n": 95,
+        "pct": 28.8
+      },
+      {
+        "attribute": "tenure",
+        "segment": "Under 1 year",
+        "Profile": "Moderate-High Engagement",
+        "n": 95,
+        "pct": 28.8
+      },
+      {
+        "attribute": "tenure",
+        "segment": "Under 1 year",
+        "Profile": "High Engagement",
+        "n": 64,
+        "pct": 19.4
+      },
+      {
+        "attribute": "level",
+        "segment": "Individual contributor",
+        "Profile": "Low Engagement",
+        "n": 104,
+        "pct": 17
+      },
+      {
+        "attribute": "level",
+        "segment": "Individual contributor",
+        "Profile": "Moderate-Low Engagement",
+        "n": 212,
+        "pct": 34.6
+      },
+      {
+        "attribute": "level",
+        "segment": "Individual contributor",
+        "Profile": "Moderate-High Engagement",
+        "n": 183,
+        "pct": 29.9
+      },
+      {
+        "attribute": "level",
+        "segment": "Individual contributor",
+        "Profile": "High Engagement",
+        "n": 113,
+        "pct": 18.5
+      },
+      {
+        "attribute": "level",
+        "segment": "Manager",
+        "Profile": "Low Engagement",
+        "n": 47,
+        "pct": 21.3
+      },
+      {
+        "attribute": "level",
+        "segment": "Manager",
+        "Profile": "Moderate-Low Engagement",
+        "n": 53,
+        "pct": 24
+      },
+      {
+        "attribute": "level",
+        "segment": "Manager",
+        "Profile": "Moderate-High Engagement",
+        "n": 78,
+        "pct": 35.3
+      },
+      {
+        "attribute": "level",
+        "segment": "Manager",
+        "Profile": "High Engagement",
+        "n": 43,
+        "pct": 19.5
+      },
+      {
+        "attribute": "level",
+        "segment": "Senior IC",
+        "Profile": "Low Engagement",
+        "n": 115,
+        "pct": 20.3
+      },
+      {
+        "attribute": "level",
+        "segment": "Senior IC",
+        "Profile": "Moderate-Low Engagement",
+        "n": 178,
+        "pct": 31.4
+      },
+      {
+        "attribute": "level",
+        "segment": "Senior IC",
+        "Profile": "Moderate-High Engagement",
+        "n": 182,
+        "pct": 32.1
+      },
+      {
+        "attribute": "level",
+        "segment": "Senior IC",
+        "Profile": "High Engagement",
+        "n": 92,
+        "pct": 16.2
+      }
+    ]
+  },
+  "oe": {
+    "worked": [
+      {
+        "profile": "Low Engagement",
+        "n": 266,
+        "pct_skipped": 2.6,
+        "n_responded": 259,
+        "pct_one_word": 15.8,
+        "pct_dismissal": 23.6,
+        "median_words": 3,
+        "mean_words": 5.1,
+        "sd_words": 4.1
+      },
+      {
+        "profile": "Moderate-Low Engagement",
+        "n": 443,
+        "pct_skipped": 0.7,
+        "n_responded": 440,
+        "pct_one_word": 7.3,
+        "pct_dismissal": 9.1,
+        "median_words": 9,
+        "mean_words": 7.3,
+        "sd_words": 4.3
+      },
+      {
+        "profile": "Moderate-High Engagement",
+        "n": 443,
+        "pct_skipped": 0.9,
+        "n_responded": 439,
+        "pct_one_word": 3.4,
+        "pct_dismissal": 4.6,
+        "median_words": 11,
+        "mean_words": 9.2,
+        "sd_words": 3.7
+      },
+      {
+        "profile": "High Engagement",
+        "n": 248,
+        "pct_skipped": 0.4,
+        "n_responded": 247,
+        "pct_one_word": 2.4,
+        "pct_dismissal": 2.4,
+        "median_words": 11,
+        "mean_words": 10.1,
+        "sd_words": 3
+      }
+    ],
+    "hard": [
+      {
+        "profile": "Low Engagement",
+        "n": 266,
+        "pct_skipped": 11.7,
+        "n_responded": 235,
+        "pct_one_word": 8.5,
+        "pct_dismissal": 8.9,
+        "median_words": 4,
+        "mean_words": 6,
+        "sd_words": 4.8
+      },
+      {
+        "profile": "Moderate-Low Engagement",
+        "n": 443,
+        "pct_skipped": 18.1,
+        "n_responded": 363,
+        "pct_one_word": 14.6,
+        "pct_dismissal": 16,
+        "median_words": 11,
+        "mean_words": 8.2,
+        "sd_words": 5.3
+      },
+      {
+        "profile": "Moderate-High Engagement",
+        "n": 443,
+        "pct_skipped": 24.4,
+        "n_responded": 335,
+        "pct_one_word": 23,
+        "pct_dismissal": 26.6,
+        "median_words": 11,
+        "mean_words": 8,
+        "sd_words": 5.4
+      },
+      {
+        "profile": "High Engagement",
+        "n": 248,
+        "pct_skipped": 26.2,
+        "n_responded": 183,
+        "pct_one_word": 23.5,
+        "pct_dismissal": 28.4,
+        "median_words": 11,
+        "mean_words": 8.7,
+        "sd_words": 5.6
+      }
+    ]
+  }
+}
