@@ -214,16 +214,12 @@
     <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle colour theme">◐ Theme</button>
   </div>
   <div class="wrap hero">
-    <p class="attribution">
-      Built by <a href="https://j-snowden.github.io/" target="_blank" rel="noopener">Jeff Snowden</a>
-      to demonstrate the factor analysis and latent profile methodology he contributed to a peer-reviewed
-      assessment study — reconstructed here, on synthetic data, in an employee-experience setting.
-    </p>
     <h1>The people the dashboard cannot see</h1>
     <p class="lead" id="heroLead">
-      Sorting people into groups by how they answered separates the worst experiences from the best far more
-      cleanly than sorting them by department, tenure, or level ever could — because the groups the org chart
-      knows about are not what is driving the difference.
+      Standard reporting cuts a workforce by department, tenure, and level. Grouping people instead by
+      <em>how they answered</em> adds a layer those cuts can't produce on their own — one that separates the
+      worst experiences from the best far more sharply, because what drives the difference runs across the
+      groups the org chart already knows about.
     </p>
     <div class="chips" id="chips" aria-label="Study parameters"></div>
   </div>
@@ -234,39 +230,49 @@
   <!-- SECTION 0 -->
   <section id="s0">
     <div class="wrap">
-      <p class="eyebrow">Where this came from</p>
-      <div class="section-intro">
-        <p id="s0p1">
-          A research team asked 1,698 middle- and high-school students not whether they passed a science test,
-          but how it <em>felt</em>. The answers sorted into four kinds of experience — and the students having
-          the worst time were not identifiable in advance from any demographic characteristic the team examined;
-          the profiles cut clean across every group. That finding is what this page reconstructs, in an employee
-          context, on synthetic data.
-        </p>
-        <p>
-          Assessment experience and employee experience are the same measurement problem. Both ask people how
-          something felt; both need the instrument validated before the answers mean anything; and both are
-          usually analysed by sorting people into groups defined in advance — department, tenure, level. That
-          last habit is what this page is about.
-        </p>
-      </div>
       <div class="callout" id="provenance">
         <p style="margin-bottom:.6em">
-          The method is real. It was built for a peer-reviewed study of 1,698 students and presented at AERA 2026:
+          The method here is real: a peer-reviewed study of 1,698 students, presented at AERA 2026, where I was a
+          co-equal first author and contributed the factor analysis, the latent profile analysis, and the model
+          selection.
         </p>
-        <p style="margin-bottom:.6em; font-size:.95rem">
+        <p class="muted" style="font-size:.9rem; margin-bottom:.6em">
           Herrmann Abell, C. F., Deverel-Rico, C., Snowden, J., Brubaker, A., Campanella, M., Flanagan, J.,
           Lee, D., Olson, P., &amp; Wilson, C. D. (2026). <em>Centering Student Voice in Science Assessment
           through Leveraging Student Experience Data.</em> AERA Annual Meeting, Los Angeles.
         </p>
-        <p class="muted" style="font-size:.9rem; margin-bottom:0">
-          Co-equal first authorship: Herrmann Abell, Deverel-Rico, and Snowden. This author contributed the
-          factor analysis, the latent profile analysis, and the model selection. <strong>The data on this page
-          are synthetic</strong> — generated from stipulated parameters, because the real responses belong to the
-          research organisation and were collected from minors under IRB protocols. Nothing here is a finding of
-          the published study; it is a demonstration of its method.
+        <p style="margin-bottom:0; font-size:.95rem">
+          <strong>The data on this page are synthetic</strong> — generated from stipulated parameters, because the
+          real responses belong to the research organisation and were collected from minors under IRB protocols.
+          Nothing here is a finding of the published study; it is a demonstration of its method, moved from an
+          assessment setting into an employee-experience one.
         </p>
       </div>
+
+      <details class="evidence" id="methodContext" style="margin-top:18px">
+        <summary>
+          <span class="tw">▸</span>
+          <span>The method behind this
+            <span class="sub">— why an assessment technique transfers to employee experience</span>
+          </span>
+        </summary>
+        <div class="evidence-body">
+          <p style="font-size:.95rem; margin-top:16px">
+            A research team asked 1,698 middle- and high-school students not whether they passed a science test,
+            but how it <em>felt</em>. The answers sorted into four kinds of experience — and the students having
+            the worst time were not identifiable in advance from any demographic characteristic the team examined;
+            the profiles cut clean across every group. That finding is what this page reconstructs, in an employee
+            context, on synthetic data.
+          </p>
+          <p style="font-size:.95rem; margin-bottom:0">
+            Assessment experience and employee experience are the same measurement problem. Both ask people how
+            something felt; both need the instrument validated before the answers mean anything; and both are
+            usually reported by sorting people into groups defined in advance — department, tenure, level. Latent
+            profile analysis is a layer that runs alongside that reporting, grouping people by their answers rather
+            than their attributes. That added layer is what this page is about.
+          </p>
+        </div>
+      </details>
     </div>
   </section>
 
@@ -277,8 +283,9 @@
       <div class="section-intro">
         <h2>The people the dashboard cannot see</h2>
         <p>
-          A latent profile analysis groups respondents by the pattern of their answers rather than by anything
-          already on file about them. Applied here, it separates four kinds of experience.
+          Dashboards are built to summarise a workforce by its recorded attributes — department, tenure, level.
+          A latent profile analysis adds what they aren't built to show: it groups respondents by the pattern of
+          their answers instead. Applied here, it separates four kinds of experience.
         </p>
       </div>
 
@@ -445,6 +452,26 @@
     </div>
   </section>
 
+  <!-- SECTION 6 — so what + contact -->
+  <section id="s6">
+    <div class="wrap">
+      <p class="eyebrow">What it's for</p>
+      <div class="section-intro">
+        <p>
+          Run alongside standard reporting, this technique surfaces an at-risk segment that department-, tenure-,
+          and level-based cuts can't isolate — here, the ~19% in the lowest-experience profile, spread evenly
+          across every group. Once that segment can be named, it can be staffed and acted on.
+        </p>
+        <p style="margin-bottom:0">
+          <strong>Jeffrey Snowden</strong> — research &amp; measurement scientist. &nbsp;
+          <a href="https://j-snowden.github.io/">← Back to main site</a> ·
+          <a href="mailto:jeffreysnowden@gmail.com">Email</a> ·
+          <a href="https://www.linkedin.com/in/jeffrey-snowden-710446110/">LinkedIn</a>
+        </p>
+      </div>
+    </div>
+  </section>
+
 </main>
 
 <footer>
@@ -452,7 +479,8 @@
     <p id="footMeta"></p>
     <p>
       Method reconstructed from Herrmann Abell, Deverel-Rico, Snowden, et al. (2026), AERA. Synthetic data;
-      not the study's findings. Pipeline and source at the top of this page's author link.
+      not the study's findings. Pipeline and source linked from the
+      <a href="https://j-snowden.github.io/">main site</a>.
     </p>
   </div>
 </footer>
@@ -588,14 +616,19 @@
   // ------------------------------------------------------------------
   function renderChips() {
     const m = D.meta;
+    // Uniform rigor chips (no accented chip). Each is content-supported:
+    //  - "15 items · 5 factors" from meta;
+    //  - "18 models compared" = the LPA grid (3 covariance structures x k=1-6), D.grid.length;
+    //  - "Split-half validated" = the 50/50 EFA/CFA split (see D.cfa / evidence section);
+    //  - "Method · AERA 2026" = the peer-reviewed provenance.
     const chips = [
-      { t: m.n.toLocaleString() + ' synthetic respondents', synthetic: true },
       { t: m.n_items + ' items · ' + m.n_factors + ' factors' },
-      { t: 'Latent profile analysis' },
+      { t: D.grid.length + ' models compared' },
+      { t: 'Split-half validated' },
       { t: 'Method · AERA 2026' }
     ];
     document.getElementById('chips').innerHTML = chips.map(c =>
-      `<span class="chip${c.synthetic?' synthetic':''}">${esc(c.t)}</span>`).join('');
+      `<span class="chip">${esc(c.t)}</span>`).join('');
   }
 
   // Section 2: the profile solution
@@ -660,7 +693,8 @@
       `in engagement profile research and which constrains what follows from them. A solution with genuinely ` +
       `different shapes would support different interventions per profile. This one supports knowing that ` +
       `<strong>${esc(low.label)}</strong> is <span class="big-number">${num(low.pct,0)}%</span> of respondents — ` +
-      `${low.n} people — and knowing that it is not defined by anything already recorded in the HR system.`;
+      `${low.n} people — a segment standard reporting can't isolate on its own, because it doesn't line up with ` +
+      `anything already recorded in the HR system.`;
   }
 
   // Section 3: k selector
