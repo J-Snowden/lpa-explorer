@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>The people the dashboard cannot see — a latent profile demonstration</title>
+<title>Experience patterns standard dashboards may miss: a latent profile demonstration</title>
 <style>
   :root {
     --bg: #ffffff;
@@ -216,43 +216,40 @@
 
 <header class="top">
   <div class="topbar">
-    <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle colour theme">◐ Theme</button>
+    <button class="theme-toggle" id="themeToggle" type="button" aria-label="Toggle color theme">◐ Theme</button>
   </div>
   <div class="wrap hero">
-    <h1>The people the dashboard cannot see</h1>
+    <h1>Experience patterns standard dashboards may miss</h1>
     <p class="lead" id="heroLead">
-      Standard reporting cuts a workforce by department, tenure, and level. Grouping people instead by
-      <em>how they answered</em> adds a layer those cuts can't produce on their own — one that separates the
-      worst experiences from the best far more sharply, because what drives the difference runs across the
-      groups the org chart already knows about.
+      Standard reports typically compare employees by department, tenure, or level. Latent profile analysis
+      uses a different approach, grouping people according to their response patterns. Using synthetic
+      employee-experience data, this project shows how that approach can identify patterns that standard
+      reporting may miss.
     </p>
     <div class="chips" id="chips" aria-label="Study parameters"></div>
     <details class="evidence" id="methodContext" style="margin-top:16px">
       <summary>
         <span class="tw">▸</span>
-        <span>Synthetic data reconstructing a peer-reviewed method.
-          <span class="sub">The method behind this.</span>
+        <span>Synthetic data based on an AERA 2026 study.
+          <span class="sub">About the project.</span>
         </span>
       </summary>
         <div class="evidence-body">
           <p style="font-size:.95rem; margin-top:16px">
-            A research team asked 1,698 middle- and high-school students not whether they passed a science test,
-            but how it <em>felt</em>. The answers sorted into four kinds of experience — and the students having
-            the worst time were not identifiable in advance from any demographic characteristic the team examined;
-            the profiles cut clean across every group. That finding is what this page reconstructs, in an employee
-            context, on synthetic data.
+            The source study examined how 1,698 middle- and high-school students experienced a science assessment.
+            Latent profile analysis identified four patterns of experience. The students reporting the most negative
+            experiences could not be identified from the demographic characteristics examined because the profiles
+            cut across those groups. This page adapts that analysis to a synthetic employee-experience dataset.
           </p>
           <p style="font-size:.95rem">
-            Assessment experience and employee experience are the same measurement problem. Both ask people how
-            something felt; both need the instrument validated before the answers mean anything; and both are
-            usually reported by sorting people into groups defined in advance — department, tenure, level. Latent
-            profile analysis is a layer that runs alongside that reporting, grouping people by their answers rather
-            than their attributes. That added layer is what this page is about.
+            Assessment experience and employee experience pose similar measurement questions. Both use instruments
+            to measure how people experienced an event or environment, and both are often reported using groups
+            defined in advance. Latent profile analysis adds another perspective by grouping people according to
+            their responses rather than their recorded characteristics.
           </p>
           <p style="font-size:.95rem">
-            The method here is real: a peer-reviewed study of 1,698 students, presented at AERA 2026, where I was a
-            co-equal first author and contributed the factor analysis, the latent profile analysis, and the model
-            selection.
+            The analysis is based on a study of 1,698 students presented at AERA 2026. I was a co-equal first author
+            and conducted the factor analysis, latent profile analysis, and model-selection work.
           </p>
           <p class="muted" style="font-size:.9rem">
             Herrmann Abell, C. F., Deverel-Rico, C., Snowden, J., Brubaker, A., Campanella, M., Flanagan, J.,
@@ -260,10 +257,10 @@
             through Leveraging Student Experience Data.</em> AERA Annual Meeting, Los Angeles.
           </p>
           <p style="font-size:.95rem; margin-bottom:0">
-            <strong>The data on this page are synthetic</strong> — generated from stipulated parameters, because the
-            real responses belong to the research organisation and were collected from minors under IRB protocols.
-            Nothing here is a finding of the published study; it is a demonstration of its method, moved from an
-            assessment setting into an employee-experience one.
+            <strong>The data on this page are synthetic</strong> and were generated from specified parameters. The
+            original responses belong to the research organization and were collected from minors under IRB-approved
+            protocols. The results shown here are not findings from the study. They demonstrate the method in an
+            employee-experience context.
           </p>
         </div>
       </details>
@@ -277,11 +274,10 @@
     <div class="wrap wide">
       <p class="eyebrow">The finding</p>
       <div class="section-intro">
-        <h2>The people the dashboard cannot see</h2>
+        <h2>Four experience profiles</h2>
         <p>
-          Dashboards are built to summarise a workforce by its recorded attributes — department, tenure, level.
-          A latent profile analysis adds what they aren't built to show: it groups respondents by the pattern of
-          their answers instead. Applied here, it separates four kinds of experience.
+          The retained solution identifies Low, Moderate-Low, Moderate-High, and High Engagement profiles.
+          Classification is strong across all four, with average posterior probabilities ranging from .90 to .94.
         </p>
       </div>
 
@@ -308,11 +304,11 @@
     <div class="wrap wide">
       <p class="eyebrow">The decision</p>
       <div class="section-intro">
-        <h2>How many kinds of experience?</h2>
+        <h2>How many profiles should be retained?</h2>
         <p>
-          The profiles are not given; the analyst chooses how many to keep. That choice is not cosmetic — it
-          decides whether the worst-off group exists as something you can staff for. Change it and watch the
-          recommendation change.
+          The analyst must decide how many profiles to retain by considering model fit, classification quality,
+          class size, and interpretability. Use the controls below to compare the three-, four-, and five-profile
+          solutions and see how the interpretation changes.
         </p>
       </div>
 
@@ -331,7 +327,7 @@
         <div>
           <div class="card rec" id="s3rec" style="margin-top:0"></div>
           <p class="muted" style="font-size:.9rem; margin-top:14px">
-            This choice is a judgement. The evidence behind it is in
+            Model selection requires judgment. The evidence supporting this decision is presented in
             <a href="#s5" id="jumpEvidence">the model-selection section</a> below.
           </p>
         </div>
@@ -344,20 +340,20 @@
     <div class="wrap wide">
       <p class="eyebrow">A second blind spot</p>
       <div class="section-intro">
-        <h2>Who answers the “what’s wrong” question</h2>
+        <h2>Who answers the “what’s wrong” question?</h2>
         <p>
-          Reading the free-text comments does not rescue you, because response behaviour is itself sorted by
-          profile. Skip rates on the two open prompts run in opposite directions.
+          Open-text comments can introduce another source of bias because the likelihood of responding varies by
+          profile. The two prompts show different patterns of nonresponse.
         </p>
       </div>
 
       <div class="grid2" style="align-items:start">
         <div class="chartcard">
-          <div class="chart-title">“What worked” — % who skipped</div>
+          <div class="chart-title">“What worked”: % who skipped</div>
           <div id="oeWorked"></div>
         </div>
         <div class="chartcard">
-          <div class="chart-title">“What was hard” — % who skipped</div>
+          <div class="chart-title">“What was hard”: % who skipped</div>
           <div id="oeHard"></div>
         </div>
       </div>
@@ -365,11 +361,12 @@
 
       <div class="callout" style="margin-top:20px">
         <p id="s4note"></p>
+        <p id="s4note2" style="margin-bottom:0"></p>
       </div>
 
       <div class="tablewrap">
         <table id="oeTable">
-          <caption>Response behaviour by profile. Word counts and dismissal rates are over respondents who did not skip.</caption>
+          <caption>Response behavior by profile. Word counts and dismissal rates are over respondents who did not skip.</caption>
           <thead>
             <tr>
               <th>Profile</th><th>Prompt</th><th>Skipped %</th><th>One-word %</th>
@@ -379,6 +376,11 @@
           <tbody></tbody>
         </table>
       </div>
+      <p class="figure-note">
+        A dismissal is a non-skipped response that, after lowercasing and removing trailing punctuation, exactly
+        matches a fixed list of throwaway answers: “nothing,” “n/a,” “no,” “none,” “idk,” “not really,” “nope,”
+        “na,” or “nothin.”
+      </p>
     </div>
   </section>
 
@@ -388,32 +390,33 @@
       <p class="eyebrow">Under the hood</p>
       <h2 style="margin-bottom:.3em">The evidence behind the choice</h2>
       <p class="muted section-intro" style="margin-bottom:18px">
-        Everything above rests on a model-selection decision and a measurement model. Both are here in full, for
-        the reader who wants them.
+        The conclusions above depend on validating the measurement model and selecting the number of profiles. The
+        full evidence for both is provided below.
       </p>
 
       <details class="evidence" id="evidence">
         <summary>
           <span class="tw">▸</span>
-          <span>The model selection, in full
-            <span class="sub">— 18-model grid, four criteria, and what each does and does not settle</span>
+          <span>Full model-selection evidence:
+            <span class="sub">18 specifications and four criteria</span>
           </span>
         </summary>
         <div class="evidence-body">
 
           <h3 style="margin-top:18px">The measurement model was validated first</h3>
           <p style="font-size:.95rem">
-            Before any profiles were extracted, the five-factor structure was confirmed on held-out data. The
-            sample was split 50/50: an exploratory analysis on one half, a confirmatory fit on the other, so the
-            structure is not discovered and confirmed on the same respondents. Scores were then extracted from the
-            winning model refit on the full sample.
+            Before estimating the profiles, I validated the five-factor structure on held-out data. I split the
+            sample evenly, conducted an exploratory analysis on one half, and evaluated confirmatory fit on the
+            other. This avoids selecting and confirming the structure with the same respondents. I then refit the
+            selected model to the full sample and extracted factor scores for the profile analysis.
           </p>
           <p id="cfaProse" style="font-size:.95rem"></p>
 
-          <h3 style="margin-top:22px">Four criteria, two of them silent</h3>
+          <h3 style="margin-top:22px">How the four criteria contributed</h3>
           <p style="font-size:.95rem">
-            The retained solution is <strong>Model 2 (varying variances, zero covariances), k = 4</strong>. The
-            honest part is what each conventional criterion actually contributes to that choice.
+            The retained solution is <strong>Model 2 (varying variances and zero covariances) with four
+            profiles</strong>. Each model-selection criterion contributes different information, and no single
+            criterion determines the choice.
           </p>
           <div class="crit-cards" id="critCards"></div>
 
@@ -421,7 +424,7 @@
           <p style="font-size:.95rem" id="elbowProse"></p>
           <div class="tablewrap">
             <table id="selTable">
-              <caption>Model 2 across k. The bar tracks the share of the previous step's BIC improvement retained — the elbow is a change in <em>rate</em>, which absolute BIC hides.</caption>
+              <caption>Model 2 across values of k. The bars show the percentage of the preceding BIC improvement retained at each step. This makes the elbow visible even though the absolute BIC continues to decline.</caption>
               <thead>
                 <tr><th>k</th><th>BIC</th><th>Δ BIC</th><th>% of previous step</th><th>Entropy</th><th>Min class %</th><th>BLRT p</th></tr>
               </thead>
@@ -431,10 +434,10 @@
 
           <p style="font-size:.95rem" id="segNote"></p>
 
-          <h3 style="margin-top:22px">The full grid — 18 specifications</h3>
+          <h3 style="margin-top:22px">The full grid: 18 specifications</h3>
           <div class="tablewrap">
             <table id="gridTable">
-              <caption>Three covariance structures × k = 1–6. The retained cell is highlighted.</caption>
+              <caption>Three covariance structures across k = 1 to 6. The retained solution is highlighted.</caption>
               <thead>
                 <tr><th>Spec</th><th>k</th><th>logLik</th><th>AIC</th><th>BIC</th><th>Entropy</th><th>Min class %</th><th>BLRT p</th></tr>
               </thead>
@@ -598,13 +601,13 @@
     // Uniform rigor chips (no accented chip). Each is content-supported:
     //  - "15 items · 5 factors" from meta;
     //  - "18 models compared" = the LPA grid (3 covariance structures x k=1-6), D.grid.length;
-    //  - "Split-half validated" = the 50/50 EFA/CFA split (see D.cfa / evidence section);
-    //  - "Peer-reviewed method" = the peer-reviewed provenance (AERA 2026; full detail in the collapsible).
+    //  - "Split-sample validation" = the 50/50 EFA/CFA split (see D.cfa / evidence section);
+    //  - "Based on AERA 2026 research" = the peer-reviewed provenance (AERA 2026; full detail in the collapsible).
     const chips = [
       { t: m.n_items + ' items · ' + m.n_factors + ' factors' },
       { t: D.grid.length + ' models compared' },
-      { t: 'Split-half validated' },
-      { t: 'Peer-reviewed method' }
+      { t: 'Split-sample validation' },
+      { t: 'Based on AERA 2026 research' }
     ];
     document.getElementById('chips').innerHTML = chips.map(c =>
       `<span class="chip">${esc(c.t)}</span>`).join('');
@@ -661,19 +664,18 @@
     const structural = avgRange(STRUCTURAL);
     const affective = avgRange(AFFECTIVE);
     document.getElementById('s2interpText').innerHTML =
-      `The four profiles separate far more on the affective factors — Engagement, Impact, Autonomy — than on the ` +
-      `structural ones — Clarity, Enablement. Across the solution, the affective factors span an average of ` +
-      `<span class="big-number">${num(affective,2)} SD</span> from lowest to highest profile, versus ` +
-      `<span class="big-number">${num(structural,2)} SD</span> for the structural pair. People report broadly ` +
-      `similar clarity about what is expected of them, and very different levels of investment in it. Whatever ` +
-      `distinguishes these groups, it is not that some of them lack information.`;
+      `The profiles differ more on Engagement, Impact, and Autonomy than on Clarity and Enablement. The first ` +
+      `three factors span an average of <span class="big-number">${num(affective,2)} standard deviations</span> ` +
+      `across profiles, compared with <span class="big-number">${num(structural,2)}</span> for the latter two. ` +
+      `Respondents therefore report relatively similar levels of clarity and enablement but substantially ` +
+      `different experiences on the affective factors.`;
     document.getElementById('s2limitText').innerHTML =
-      `These profiles are also ordinal: the groups differ in level more than in shape, which is the common result ` +
-      `in engagement profile research and which constrains what follows from them. A solution with genuinely ` +
-      `different shapes would support different interventions per profile. This one supports knowing that ` +
-      `<strong>${esc(low.label)}</strong> is <span class="big-number">${num(low.pct,0)}%</span> of respondents — ` +
-      `${low.n} people — a segment standard reporting can't isolate on its own, because it doesn't line up with ` +
-      `anything already recorded in the HR system.`;
+      `The profiles are primarily ordinal, meaning they differ more in level than in shape. This limits what can ` +
+      `be inferred from them. Profiles with different shapes might suggest different approaches for different ` +
+      `groups. Here, the model provides an empirically derived way to identify the ` +
+      `<strong>${esc(low.label)}</strong> profile, which includes <span class="big-number">${num(low.pct,0)}%</span> ` +
+      `of the synthetic sample, or ${low.n} respondents. Its lack of association with department, tenure, and level ` +
+      `was built into the simulation to reflect a pattern observed in the source study.`;
   }
 
   // Section 3: k selector
@@ -699,29 +701,29 @@
       const lowest = sol[0];
       title = 'Under-extraction';
       cls = 'rejected';
-      body = `Three profiles collapse the bottom of the scale. The worst-experience group visible at k = 4 — ` +
-        `<strong>${sol4low.n} people, ${num(sol4low.pct,0)}%</strong> of the sample — is absorbed into a broad ` +
-        `moderate-low band (${esc(lowest.label)}, ${num(lowest.pct,1)}%). A population the model no longer ` +
-        `distinguishes cannot be staffed for. Nothing would be aimed at them.`;
+      body = `The three-profile solution combines the two lowest groups. The <strong>${esc(sol4low.label)}</strong> ` +
+        `profile identified at k = 4, which includes <strong>${sol4low.n} people or ${num(sol4low.pct,0)}% of the ` +
+        `sample</strong>, is absorbed into a broader group representing ${num(lowest.pct,1)}% of respondents. As a ` +
+        `result, the model no longer distinguishes respondents reporting the most negative experiences.`;
     } else if (k === '4') {
       const lowAv = av[sol4low.label];
       title = 'Retained';
       cls = 'retained';
-      body = `<strong>${esc(sol4low.label)}</strong> is a separable <strong>${num(sol4low.pct,0)}%</strong> of ` +
-        `respondents (${sol4low.n} people), with average posterior probability ` +
-        `<strong>${num(lowAv,2).replace(/^0\./,'.')}</strong> — clean enough to aim an intervention at. Every class ` +
-        `clears 5%, and the profiles are ordered and interpretable. This is the solution the evidence below supports.`;
+      body = `The four-profile solution retains a distinct <strong>${esc(sol4low.label)}</strong> group representing ` +
+        `<strong>${num(sol4low.pct,0)}%</strong> of respondents, or ${sol4low.n} people, with an average posterior ` +
+        `probability of <strong>${num(lowAv,2).replace(/^0\./,'.')}</strong>. Every profile includes at least 5% of ` +
+        `the sample, and the profiles are ordered and interpretable. Taken together, the evidence below supports ` +
+        `retaining this solution.`;
     } else {
       const smallest = sol.reduce((a,b)=> b.pct < a.pct ? b : a);
       title = 'Over-extraction';
       cls = 'rejected';
-      body = `Five profiles split the middle of the distribution. The additional class is small ` +
-        `(${num(smallest.pct,1)}%) and its separation from its neighbours is weak — it would not survive being ` +
-        `briefed to a stakeholder as a distinct kind of experience. The extra profile buys precision the data ` +
-        `cannot support.`;
+      body = `The five-profile solution divides the middle of the distribution. The additional class contains ` +
+        `${num(smallest.pct,1)}% of respondents, but its separation from neighboring profiles is weak. The fifth ` +
+        `profile adds complexity without providing a clearly distinct or useful pattern of experience.`;
     }
     document.getElementById('s3rec').innerHTML =
-      `<p class="verdict ${cls}" style="margin-bottom:.4em">k = ${k} · ${title}</p><p style="margin-bottom:0">${body}</p>`;
+      `<p class="verdict ${cls}" style="margin-bottom:.4em">k = ${k}: ${title}</p><p style="margin-bottom:0">${body}</p>`;
 
     // button labels
     [['k3','3'],['k4','4'],['k5','5']].forEach(([id,kk])=>{
@@ -744,15 +746,18 @@
     const lowHard = hard[0].pct_skipped, highHard = hard[hard.length-1].pct_skipped;
     const lowDis = worked[0].pct_dismissal, highDis = worked[worked.length-1].pct_dismissal;
     document.getElementById('s4note').innerHTML =
-      `The inversion is the point. On “what was hard,” the people with the fewest problems answer least — the ` +
-      `<strong>${esc(hard[hard.length-1].profile)}</strong> group skips <strong>${num(highHard,1)}%</strong> of the ` +
-      `time versus <strong>${num(lowHard,1)}%</strong> for <strong>${esc(hard[0].profile)}</strong>. So the ` +
-      `comment corpus for “what’s wrong” is written disproportionately by the disengaged. And on “what worked,” ` +
-      `the disengaged do respond but say little — ${num(lowDis,1)}% dismissals versus ${num(highDis,1)}%. Response ` +
-      `behaviour is data, not missingness: the people with the fewest problems are the least likely to answer the ` +
-      `“what’s wrong” prompt at all, so a comment corpus built from that prompt systematically overrepresents the ` +
-      `disengaged before a single word is read. Any thematic analysis that treats the corpus as representative of ` +
-      `the workforce is reading the loudest signal as though it were the typical one.`;
+      `For “what was hard,” respondents in the <strong>${esc(hard[hard.length-1].profile)}</strong> profile skip ` +
+      `the question <strong>${num(highHard,1)}%</strong> of the time, compared with ` +
+      `<strong>${num(lowHard,1)}%</strong> in the <strong>${esc(hard[0].profile)}</strong> profile. The people ` +
+      `reporting fewer problems are therefore less likely to answer, causing the comments to overrepresent ` +
+      `respondents with more negative experiences.`;
+    document.getElementById('s4note2').innerHTML =
+      `A different pattern appears for “what worked.” Respondents in the <strong>${esc(worked[0].profile)}</strong> ` +
+      `profile usually answer, but <strong>${num(lowDis,1)}%</strong> of their responses are dismissals, compared ` +
+      `with <strong>${num(highDis,1)}%</strong> in the <strong>${esc(worked[worked.length-1].profile)}</strong> ` +
+      `profile. Patterns of response and nonresponse are therefore part of the finding. A thematic analysis that ` +
+      `treats these comments as representative of the workforce could mistake the most visible concerns for the ` +
+      `most typical ones.`;
 
     const tb = document.querySelector('#oeTable tbody');
     const mkRows = (arr, prompt) => arr.map(r => `
@@ -773,13 +778,14 @@
     const cross = c.comparison.find(m => /cross/i.test(m.Model) && !/no/i.test(m.Model));
     const noCross = c.comparison.find(m => /no cross/i.test(m.Model));
     document.getElementById('cfaProse').innerHTML =
-      `Suitability held (KMO = ${num(c.kmo,3).replace(/^0\./,'.')}, Bartlett significant), and parallel analysis ` +
-      `extracted ${c.parallel_n} factors. On the held-out half, the theorised cross-loading model fit well ` +
-      `(CFI = ${num(cross.CFI,3).replace(/^0\./,'.')}, TLI = ${num(cross.TLI,3).replace(/^0\./,'.')}, ` +
-      `RMSEA = ${num(cross.RMSEA,3).replace(/^0\./,'.')} [${num(cross.RMSEA_lo,3).replace(/^0\./,'.')}, ` +
-      `${num(cross.RMSEA_hi,3).replace(/^0\./,'.')}], SRMR = ${num(cross.SRMR,3).replace(/^0\./,'.')}) and clearly ` +
-      `beat the constrained model (CFI = ${num(noCross.CFI,3).replace(/^0\./,'.')}). The measurement model earns its ` +
-      `structure before any profile is drawn.`;
+      `Sampling adequacy was acceptable (KMO = ${num(c.kmo,3).replace(/^0\./,'.')}; Bartlett's test was ` +
+      `significant), and parallel analysis supported a five-factor solution. On the held-out sample, the ` +
+      `theorized cross-loading model fit well (CFI = ${num(cross.CFI,3).replace(/^0\./,'.')}, ` +
+      `TLI = ${num(cross.TLI,3).replace(/^0\./,'.')}, RMSEA = ${num(cross.RMSEA,3).replace(/^0\./,'.')} ` +
+      `[${num(cross.RMSEA_lo,3).replace(/^0\./,'.')}, ${num(cross.RMSEA_hi,3).replace(/^0\./,'.')}], ` +
+      `SRMR = ${num(cross.SRMR,3).replace(/^0\./,'.')}) and fit substantially better than the constrained model ` +
+      `(CFI = ${num(noCross.CFI,3).replace(/^0\./,'.')}). These results support the factor structure used in the ` +
+      `profile analysis.`;
   }
 
   function renderCritCards() {
@@ -789,19 +795,20 @@
     const s4 = sel.find(r => r.classes === 4), s5 = sel.find(r => r.classes === 5);
     const bicMinRow = D.grid.filter(r=>r.model===2).reduce((a,b)=> b.bic < a.bic ? b : a);
     const cards = [
-      { name: 'BIC', tag: 'decisive', tagclass: 'decisive', tagtext: 'The operative rule',
-        body: `Has <strong>no minimum at k = 4</strong> — it keeps declining through k = ${bicMinRow.classes}. ` +
-          `So the raw minimum is not the criterion; the elbow is. The BIC improvement retains ` +
-          `${num(s4.pct_of_prev,0)}% of the previous step at k = 4 but only ${num(s5.pct_of_prev,0)}% at k = 5.` },
-      { name: 'Entropy', tag: 'decisive', tagclass: 'decisive', tagtext: 'Supporting',
-        body: `${num(k4.entropy,3).replace(/^0\./,'.')} at k = 4 — above the .80 threshold for adequate ` +
-          `classification — and declining as k grows. It corroborates the elbow rather than setting it.` },
-      { name: 'BLRT', tag: 'silent', tagclass: 'silent', tagtext: 'Silent',
-        body: `Significant at <strong>every</strong> k (p = ${num(k4.blrt_p,4)}, the floor for 100 bootstrap ` +
-          `draws). A test that never stops rejecting adjudicates nothing here.` },
-      { name: 'Minimum class size', tag: 'silent', tagclass: 'silent', tagtext: 'Silent',
-        body: `Never binds — every Model-2 solution clears 5% through k = 6 (${num(k4.n_min_pct,1)}% at k = 4). ` +
-          `It rules nothing out in this grid.` }
+      { name: 'BIC', tag: 'decisive', tagclass: 'decisive', tagtext: 'Primary evidence',
+        body: `BIC continues to decline through k = ${bicMinRow.classes}, so the absolute minimum does not ` +
+          `identify k = 4. The decision instead uses the elbow. The BIC improvement at k = 4 retains ` +
+          `${num(s4.pct_of_prev,0)}% of the previous step, compared with ${num(s5.pct_of_prev,0)}% at k = 5.` },
+      { name: 'Entropy', tag: 'decisive', tagclass: 'decisive', tagtext: 'Supporting evidence',
+        body: `Entropy is ${num(k4.entropy,3).replace(/^0\./,'.')} at k = 4, above the .80 guideline for adequate ` +
+          `classification, and declines as k increases. It supports the four-profile solution but does not ` +
+          `determine it.` },
+      { name: 'BLRT', tag: 'silent', tagclass: 'silent', tagtext: 'Inconclusive',
+        body: `The BLRT is significant at every value of k (p = ${num(k4.blrt_p,4).replace(/^0\./,'.')}, the ` +
+          `minimum possible with 100 bootstrap draws), so it does not distinguish among the solutions.` },
+      { name: 'Minimum class size', tag: 'silent', tagclass: 'silent', tagtext: 'Non-discriminating',
+        body: `Every Model 2 solution through k = 6 has a minimum class larger than 5%. Because no solution is ` +
+          `ruled out, this criterion does not distinguish among them.` }
     ];
     document.getElementById('critCards').innerHTML = cards.map(c => `
       <div class="crit">
@@ -810,8 +817,9 @@
       </div>`).join('');
 
     document.getElementById('elbowProse').innerHTML =
-      `Two of the four conventional criteria are silent. The decision rests on the BIC elbow, the declining ` +
-      `entropy, and interpretability — never on a BIC minimum, which does not exist at k = 4.`;
+      `Two criteria do not distinguish among the candidate solutions. The decision therefore rests on the BIC ` +
+      `elbow, classification quality, and interpretability. It does not depend on a BIC minimum because BIC does ` +
+      `not reach one at k = 4.`;
   }
 
   function renderSegNote() {
@@ -819,12 +827,12 @@
     const vs = assoc.map(a => a.cramers_v);
     const lo = Math.min(...vs), hi = Math.max(...vs);
     document.getElementById('segNote').innerHTML =
-      `One descriptive property of the retained solution: profile membership shows no significant association ` +
-      `with department, tenure, or level after Holm correction (Cramér's V from ${num(lo,3).replace(/^0\./,'.')} ` +
-      `to ${num(hi,3).replace(/^0\./,'.')} across the three attributes). The simulation draws these attributes ` +
-      `independently of profile membership, so this null is stipulated rather than discovered — encoded into the ` +
-      `data-generating process, not found by the model. The warrant for encoding it that way: the source study ` +
-      `found the same pattern empirically, Cramér's V .049 to .091, all null after Holm correction.`;
+      `In the retained solution, profile membership is not significantly associated with department, tenure, or ` +
+      `level after Holm correction (Cramér's V = ${num(lo,3).replace(/^0\./,'.')} to ` +
+      `${num(hi,3).replace(/^0\./,'.')}). Because the simulation generated these attributes independently of ` +
+      `profile membership, this result was built into the data rather than discovered by the model. I specified ` +
+      `the simulation this way to reflect the source study, which found the same pattern in the observed data ` +
+      `(Cramér's V = .049 to .091; all associations were nonsignificant after Holm correction).`;
   }
 
   function renderSelTable() {
@@ -863,14 +871,14 @@
       </tr>`;
     }).join('');
     document.getElementById('ncNote').textContent =
-      'Model 3, k = 5 did not converge to a usable solution (empty class, degenerate BLRT); its cells are marked rather than shown as a spurious 0.0.';
+      'Model 3 with k = 5 did not produce a usable solution because it contained an empty class and a degenerate BLRT. Its cells are marked as nonconverged rather than reported as zero.';
   }
 
   function renderReproNote() {
     const m = D.meta;
     document.getElementById('reproNote').innerHTML =
-      `Every figure on this page is read live from <code>data/model_results.json</code> (seed ${esc(String(m.seed))}); ` +
-      `nothing is hardcoded.`;
+      `All figures are generated from <code>data/model_results.json</code> (seed ${esc(String(m.seed))}); ` +
+      `no results are hardcoded.`;
   }
 
   // ------------------------------------------------------------------
@@ -927,8 +935,8 @@
     div.className = 'wrap';
     div.innerHTML = `<div class="error-panel">
       <h2 style="margin-top:0">Could not load the results</h2>
-      <p>This page reads <code>data/model_results.json</code> at load time, so it must be served over HTTP —
-      opening the file directly from disk (<code>file://</code>) will not work. Start any static server in the
+      <p>This page reads <code>data/model_results.json</code> at load time, so it must be served over HTTP.
+      Opening the file directly from disk (<code>file://</code>) will not work. Start any static server in the
       project root and reload.</p>
       <p class="muted" style="margin-bottom:0">Technical detail: ${esc(msg)}</p>
     </div>`;
